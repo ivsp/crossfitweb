@@ -1,0 +1,21 @@
+@import "custom";
+@import "~bootstrap/scss/bootstrap";
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  color: var(--color-typography);
+}
+
+
+.container--primary{
+  padding: 0.75rem;
+  background-color: var(--color-primary, red);
+  animation: var(--main-boom-animation);
+}
+
+.container--secondary{
+  padding: 0.75rem;
+  background-color: var(--color-secondary, red);
+}
