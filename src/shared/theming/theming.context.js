@@ -16,29 +16,60 @@ import { createContext } from "react";
 *
 */
 
-// Creo un objeto con los valores para cada tipo de tema
-export const lightTheme = {
-  primary: {
-    color: "#FDDE00",
+// Creo un array con 2 posiciones, que tendrán los valores para cada tipo de tema
+// [0] --> para ligth
+// [1] --> para dark
+export const theme = [
+  {
+    primary: {
+      color: "primary",
+      code: "#333333 ",
+    },
+    secondary: {
+      color: "secondary",
+      code: "#FFFFFF ",
+    },
+    strong_details: {
+      color: "strong-details",
+      code: "#F8E71C ",
+    },
+    soft_details: {
+      color: "soft-details",
+      code: "#CCB300 ",
+    },
+    neutral_100: {
+      color: "neutral-100",
+      code: "#CCCCCC ",
+    },
+    neutral_200: {
+      color: "neutral-200",
+      code: "#999999 ",
+    },
+    neutral_300: {
+      color: "neutral-300",
+      code: "#696969 ",
+    },
+    typography: {
+      color: "black",
+    },
+    font_color: {
+      color: "#FFFFFF",
+    },
+    bg: {
+      color: "#FFFFFF",
+    },
   },
-  secondary: {
-    color: "#FFF399",
+  {
+    primary: {
+      color: "neutral-700",
+    },
+    secondary: {
+      color: "neutral-100",
+    },
+    typography: {
+      color: "red",
+    },
   },
-  typography: {
-    color: "E6E6E6",
-  },
-};
-
-export const darkTheme = {
-  primary: {
-    color: "#4D4D4D",
-  },
-  secondary: {
-    color: "#CCCCCC",
-  },
-  typography: {
-    color: "black",
-  },
-};
+];
 
 export const ThemingContext = createContext();

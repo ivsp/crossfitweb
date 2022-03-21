@@ -1,16 +1,18 @@
 import { useContext } from "react";
-import { ThemingContext } from "../theming.context";
+import { ThemingContext } from "../../shared/theming/theming.context";
 import Form from "react-bootstrap/Form";
 import React from "react";
+import { theme } from "../../shared/theming/theming.context";
 
 function ThemingSelector() {
   const [theming, setTheming] = useContext(ThemingContext);
 
   const changeTheme = (e) => {
-    if (theming === "L") {
-      setTheming("D");
+    console.log(theming);
+    if (theming === theme[0]) {
+      setTheming(theme[1]);
     } else {
-      setTheming("L");
+      setTheming(theme[0]);
     }
   };
 

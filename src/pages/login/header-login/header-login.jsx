@@ -1,36 +1,16 @@
-import "./header.scss";
-import { useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { ThemingContext } from "../../shared/theming/theming.context";
+import { ThemingContext } from "../../../shared/theming/theming.context";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
-import LanguageButton from "../../common-components/language-buton/language-button";
-import NavToggle from "../../common-components/navbar-toggle/navbar-toggle";
-import { LanguageContext } from "../../shared/language/language.context";
-import NavUserButton from "../../common-components/user-drop-down/nav-user-button";
-import { UserContext } from "../../shared/user-info/user.context";
-import { getUserData } from "../../APP/fetch/fetch-functions";
+import LanguageButton from "../../../common-components/language-buton/language-button";
 
-function Header() {
-  const [language, setLanguage] = useContext(LanguageContext);
-  const [userData, setUserData] = useContext(UserContext);
+function HeaderLogIn() {
+  const [language, setLanguage] = useState("");
   const [t, i18n] = useTranslation("header");
   const [theming] = useContext(ThemingContext);
-  //setUserLogged(localStorage.getItem("logged"));
-  const token = localStorage.getItem("token");
-  useEffect(() => {
-    //obtengo el token del session
-
-    //hacer un get para tener los datos del usuario
-    async function fetchData(token) {
-      const userdata = await getUserData(token);
-      setUserData(userdata);
-    }
-    fetchData(token);
-  }, []);
-
   const onchangeLanguage = (e) => {
     console.log(e.target.id);
     if (e.target.id === "EN") {
@@ -43,14 +23,7 @@ function Header() {
   };
   return (
     <Navbar bg={`${theming.primary.color}`} expand="none">
-      <Container
-        className="header-container"
-        style={{
-          fontFamily: "indiana",
-          fontSize: "1rem",
-        }}
-        fluid
-      >
+      <Container fluid>
         <Col
           md={{ span: 2, offset: 1 }}
           lg={{ span: 2, offset: 1 }}
@@ -58,10 +31,8 @@ function Header() {
           xxl={{ span: 2, offset: 1 }}
         >
           <Navbar.Brand
-            style={{
-              color: `${theming.font_color.color}`,
-            }}
-            href=""
+            style={{ color: `${theming.font_color.color}` }}
+            href="#home"
           >
             {/* The Best Battles/Be a Warrior */}
             LOGO+NAME
@@ -93,15 +64,10 @@ function Header() {
             onchangeLanguage={onchangeLanguage}
             language={language}
           ></LanguageButton>
-          {token ? (
-            <NavUserButton placement="end" name="end"></NavUserButton>
-          ) : (
-            <NavToggle></NavToggle>
-          )}
         </Col>
       </Container>
     </Navbar>
   );
 }
 
-export default Header;
+export default HeaderLogIn;

@@ -1,0 +1,24 @@
+{
+  "menu_lateral": {
+    "eventos": "Mis eventos",
+    "datos": "Actualizar mis datos",
+    "cerrar_sesion": "Cerrar sesión"
+  },
+  "actualizar_datos": {
+    "mis_datos": "Mis datos",
+    "nombre": "Nombre",
+    "apellidos": "Apellidos",
+    "email": "Correo electrónico",
+    "fecha_nacimiento": "Fecha de nacimiento",
+    "sexo": "Sexo",
+    "sexo_h": "H",
+    "sexo_m": "M",
+    "actualizar": "Actualizar mis datos",
+    "telefono": "Número de teléfono",
+    "nombreBox": "Nombre del box",
+    "direccion": "Dirección del box",
+    "ciudad": "Ciudad",
+    "provincia": "Provincia",
+    "cp": "Código postal"
+  }
+}

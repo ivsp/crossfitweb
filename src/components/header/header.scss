@@ -1,0 +1,26 @@
+@mixin display-flex($display,$flex-direction,$justify-content,$align-items,$gap){
+
+    display: $display;
+    flex-direction:$flex-direction;
+    justify-content : $justify-content;
+    align-items:$align-items;
+    gap:$gap
+}
+
+.header-container{
+    @include display-flex(flex,row,space-between,center,"");
+    width:100%;
+    padding: 0rem 0rem;
+}
+
+.header-links{
+
+    @include display-flex(flex,row,center,"",2rem);
+    width:100%;
+
+}
+
+.header-buttons{
+    @include display-flex(flex,row,"","",1rem);
+
+}

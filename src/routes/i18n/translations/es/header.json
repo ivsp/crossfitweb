@@ -1,5 +1,31 @@
 {
   "header": {
-    "saludo": "hola bootcamp"
+    "eventos": "Eventos",
+    "entrenamientos": "Entrenamientos",
+    "registrate": "Regístrate",
+    "iniciaSesion": "Inicia Sesion"
+  },
+  "registro": {
+    "titulo_registro": "Regístrate",
+    "titulo_inicioSesion": "Inicia sesión",
+    "bienvenida": "BIENVENIDO A THE BEST BATTLES",
+    "nombre": "Nombre",
+    "introNombre": "Introduce un nombre",
+    "email": "Correo electrónico",
+    "introEmail": "Introduzca un correo electrónico",
+    "contraseña": "Contraseña",
+    "continua": "Continúa",
+    "condiciones": "Acepto los Términos y condiciones",
+    "usuario": "Soy un usuario",
+    "box": "Soy un centro",
+    "bienvenida_login": "Inicia sesión y prepárate para encontrar los mejores eventos",
+    "saludo": "Hola",
+    "mantener_sesion": "Recordar mi usuario"
+  },
+  "busqueda": {
+    "localización": "Lugar",
+    "loc_enter": "Introduce una ciudad",
+    "categoria": "Categoría",
+    "cat_enter": "Introduzca una categoría"
   }
 }

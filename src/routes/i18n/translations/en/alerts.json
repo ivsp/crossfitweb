@@ -1,0 +1,7 @@
+{
+  "alert": {
+    "login_incorrecto": "The email or password are wrong",
+    "creacion_usuario": "We have send a message to you email. Please, click the link to validate your acoount.",
+    "usuarioexistente": "This email account already exists. Please choose another one or log in to your account."
+  }
+}

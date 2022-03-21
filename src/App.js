@@ -1,22 +1,22 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.scss";
 import "./custom.scss";
-import Header from "./components/header/header";
+import Landing from "./pages/landing/landing";
+import Login from "./pages/login/login";
+import UsersPage from "./pages/users-pages/users/users-pages";
+import Validate from "./pages/validate/validate";
 //import Footer from './components/footer';
 
 function App() {
   return (
-    <div className="app">
-      <Header></Header>
-      <main>
-        <div className="container--primary">
-          <p>Esto es un contenedor primario</p>
-        </div>
-        <div className="container--secondary">
-          <p>Esto es un contenedor Secundary</p>
-        </div>
-      </main>
-      {/* <Footer></Footer> */}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Landing />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/validate" element={<Validate />}></Route>
+        <Route path="/users" element={<UsersPage />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

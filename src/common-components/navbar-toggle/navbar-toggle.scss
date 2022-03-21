@@ -1,0 +1,39 @@
+.max-content{
+    width:10px;
+}
+
+
+
+.reset{
+    border:none;
+    outline: none;
+    border-color: transparent;
+
+}
+
+.navbar__container{
+    
+    position: relative;
+
+}
+
+.nav_button{
+    &:hover{
+        background-color: #ebebeb;    }
+}
+
+#btn1{
+    outline:none !important;
+    outline-width: 0 !important;
+    background-color: transparent;
+    border-color: none;
+    box-shadow: none;
+}
+
+#btn2{
+    outline:none !important;
+    outline-width: 0 !important;
+    background-color: transparent;
+    border-color: none;
+    box-shadow: none;
+}

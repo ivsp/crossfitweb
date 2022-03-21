@@ -1,0 +1,16 @@
+.button{
+    &:hover{
+        background-color: #F8E71C;
+        border: 1px solid #F8E71C;
+        color: #333333;
+        font-weight: bold;
+    }
+    &:focus{
+        border: none;
+        outline:none !important;
+        outline-width: 0 !important;
+        outline-style: none;
+        box-shadow: none;
+    }
+  
+}

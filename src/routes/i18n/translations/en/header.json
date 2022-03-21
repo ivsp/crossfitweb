@@ -1,5 +1,31 @@
 {
   "header": {
-    "saludo": "hello bootcamp"
+    "eventos": "Events",
+    "entrenamientos": "Trainings",
+    "registrate": "Register",
+    "iniciaSesion": "Log In"
+  },
+  "registro": {
+    "titulo_registro": "Sing up",
+    "titulo_inicioSesion": "Log in",
+    "bienvenida": "WELCOME TO THE BEST BATTLES",
+    "nombre": "Name",
+    "introNombre": "Enter a name",
+    "email": "Email addres",
+    "introEmail": "Enter a email",
+    "contraseña": "Password",
+    "continua": "Continue",
+    "condiciones": "Acept the Terms and conditions",
+    "usuario": "I am a user",
+    "box": "I am a box",
+    "bienvenida_login": "Log in and get ready to find the best events",
+    "saludo": "Hello",
+    "mantener_sesion": "Keep me logged in"
+  },
+  "busqueda": {
+    "localización": "Location",
+    "loc_enter": "Enter a city",
+    "categoria": "Category",
+    "cat_enter": "Enter a category"
   }
 }
