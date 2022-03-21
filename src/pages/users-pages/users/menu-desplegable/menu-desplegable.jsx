@@ -10,7 +10,7 @@ import {
 import { UserContext } from "../../../../shared/user-info/user.context";
 
 function LateralMenu(props) {
-  const [t, i18n] = useTranslation("users");
+  const [t] = useTranslation("users");
   const [userData, setUserData] = useContext(UserContext);
   //obtengo el token del session
   const token = localStorage.getItem("token");

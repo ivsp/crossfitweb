@@ -17,7 +17,7 @@ function SearchingArea() {
       bg={`${theming.primary.color}`}
       className="searching_conteiner"
       style={{
-        fontFamily: "indiana-italic",
+        fontFamily: "rubik-medium",
       }}
     >
       <Card className="searching_conteiner-info  ">
@@ -35,6 +35,9 @@ function SearchingArea() {
               {t("busqueda.localización")}
             </Form.Label>
             <Form.Control
+              style={{
+                fontFamily: "rubik-regular",
+              }}
               className=" border-0 bg-transparent text-center reset-inputs"
               type="text"
               placeholder={`${t("busqueda.loc_enter")}`}
@@ -54,6 +57,9 @@ function SearchingArea() {
                 {t("busqueda.categoria")}
               </Form.Label>
               <Form.Control
+                style={{
+                  fontFamily: "rubik-regular",
+                }}
                 className=" border-0 bg-transparent text-center"
                 type="text"
                 placeholder={`${t("busqueda.cat_enter")}`}

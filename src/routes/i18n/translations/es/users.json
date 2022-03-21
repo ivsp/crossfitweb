@@ -20,5 +20,10 @@
     "ciudad": "Ciudad",
     "provincia": "Provincia",
     "cp": "Código postal"
+  },
+  "eventos": {
+    "localización": "Localización:",
+    "categorias": "Categorías:",
+    "mas_info": "Más información"
   }
 }

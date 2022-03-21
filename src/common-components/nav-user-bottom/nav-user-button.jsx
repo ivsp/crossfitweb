@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Nav from "react-bootstrap/Nav";
-import { ThemingContext } from "../../shared/theming/theming.context";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../shared/user-info/user.context";
@@ -12,10 +11,9 @@ import { logOutUser } from "../../APP/fetch/fetch-functions";
 import LateralMenu from "../../pages/users-pages/users/menu-desplegable/menu-desplegable";
 
 function NavUserButton(props) {
-  //const [theming] = useContext(ThemingContext);
   const [show, setShow] = useState(false);
-  const [userData, setUserData] = useContext(UserContext);
-  const [t, i18n] = useTranslation("users");
+  const [userData] = useContext(UserContext);
+  const [t] = useTranslation("users");
   const [modalLoginShow, setModalMenuShow] = useState(false);
   const navigate = useNavigate();
 
@@ -47,17 +45,29 @@ function NavUserButton(props) {
           <Offcanvas.Title
             style={{
               fontSize: "1.5rem",
+              fontFamily: "rubik-semibold",
             }}
           >
             {userData.name}
           </Offcanvas.Title>
         </Offcanvas.Header>
-        <Nav className="flex-column p-3">
-          <Nav.Link>{t("menu_lateral.eventos")}</Nav.Link>
-          <Nav.Link onClick={() => setModalMenuShow(true)}>
+        <Nav
+          style={{
+            fontSize: "1rem",
+            fontFamily: "rubik-regular",
+          }}
+          className="flex-column "
+        >
+          <Nav.Link className="nav_link p-3">
+            {t("menu_lateral.eventos")}
+          </Nav.Link>
+          <Nav.Link
+            className="nav_link p-3"
+            onClick={() => setModalMenuShow(true)}
+          >
             {t("menu_lateral.datos")}
           </Nav.Link>
-          <Nav.Link onClick={logOut}>
+          <Nav.Link className="nav_link p-3" onClick={logOut}>
             {t("menu_lateral.cerrar_sesion")}
           </Nav.Link>
         </Nav>

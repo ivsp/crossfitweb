@@ -20,5 +20,10 @@
     "ciudad": "City",
     "provincia": "Province",
     "cp": "Postal code"
+  },
+  "eventos": {
+    "localización": "Location:",
+    "categorias": "Categories:",
+    "mas_info": "More info"
   }
 }

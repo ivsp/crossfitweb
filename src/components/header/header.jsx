@@ -46,7 +46,7 @@ function Header() {
       <Container
         className="header-container"
         style={{
-          fontFamily: "indiana",
+          fontFamily: "rubik-semibold",
           fontSize: "1rem",
         }}
         fluid
@@ -89,15 +89,15 @@ function Header() {
           xxl={{ span: 3, offset: 0 }}
           className="header-buttons justify-content-center"
         >
-          <LanguageButton
-            onchangeLanguage={onchangeLanguage}
-            language={language}
-          ></LanguageButton>
           {token ? (
             <NavUserButton placement="end" name="end"></NavUserButton>
           ) : (
             <NavToggle></NavToggle>
           )}
+          <LanguageButton
+            onchangeLanguage={onchangeLanguage}
+            language={language}
+          ></LanguageButton>
         </Col>
       </Container>
     </Navbar>

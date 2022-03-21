@@ -75,13 +75,6 @@ function LogInCenteredModal(props) {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check
-              type="checkbox"
-              label={`${t("registro.condiciones")}`}
-              required
-            />
-          </Form.Group>
           <Button
             variant="primary"
             type="submit"
