@@ -34,7 +34,7 @@ function LogInCenteredModal(props) {
     } else if (data && data?.type === "box") {
       localStorage.setItem("token", data.access_token);
       props.onHide(false);
-      navigate("/users");
+      navigate("/boxes");
     }
   };
 

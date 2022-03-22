@@ -33,10 +33,9 @@ function LoginForm() {
       localStorage.setItem("token", data.access_token);
       navigate("/users");
     } else if (data.type === "box") {
-      console.log("box");
       //redirijo a la pagina de centtros y guardo el token en el local/session access_token: token
       localStorage.setItem("token", data.access_token);
-      navigate("/users");
+      navigate("/boxes");
     }
   };
 

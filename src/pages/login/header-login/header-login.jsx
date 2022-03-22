@@ -1,16 +1,36 @@
-import { useState, useContext } from "react";
+import "../../../components/header/header.scss";
+import { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { ThemingContext } from "../../../shared/theming/theming.context";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
+import { useNavigate } from "react-router-dom";
+import { ThemingContext } from "../../../shared/theming/theming.context";
 import LanguageButton from "../../../common-components/language-buton/language-button";
+import { LanguageContext } from "../../../shared/language/language.context";
+import { UserContext } from "../../../shared/user-info/user.context";
+import { getUserData } from "../../../APP/fetch/fetch-functions";
 
 function HeaderLogIn() {
-  const [language, setLanguage] = useState("");
+  const [language, setLanguage] = useContext(LanguageContext);
+  const [userData, setUserData] = useContext(UserContext);
   const [t, i18n] = useTranslation("header");
   const [theming] = useContext(ThemingContext);
+  const navigate = useNavigate();
+  //setUserLogged(localStorage.getItem("logged"));
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    //obtengo el token del session
+
+    //hacer un get para tener los datos del usuario
+    async function fetchData(token) {
+      const userdata = await getUserData(token);
+      setUserData(userdata);
+    }
+    fetchData(token);
+  }, []);
+
   const onchangeLanguage = (e) => {
     console.log(e.target.id);
     if (e.target.id === "EN") {
@@ -23,7 +43,14 @@ function HeaderLogIn() {
   };
   return (
     <Navbar bg={`${theming.primary.color}`} expand="none">
-      <Container fluid>
+      <Container
+        className="header-container"
+        style={{
+          fontFamily: "rubik-semibold",
+          fontSize: "1rem",
+        }}
+        fluid
+      >
         <Col
           md={{ span: 2, offset: 1 }}
           lg={{ span: 2, offset: 1 }}
@@ -31,8 +58,12 @@ function HeaderLogIn() {
           xxl={{ span: 2, offset: 1 }}
         >
           <Navbar.Brand
-            style={{ color: `${theming.font_color.color}` }}
-            href="#home"
+            className="link"
+            onClick={() => navigate("/")}
+            style={{
+              color: `${theming.font_color.color}`,
+            }}
+            href=""
           >
             {/* The Best Battles/Be a Warrior */}
             LOGO+NAME
@@ -45,7 +76,11 @@ function HeaderLogIn() {
           xxl={{ span: 3, offset: 1 }}
         >
           <Nav className="header-links">
-            <Nav.Link style={{ color: `${theming.font_color.color}` }} href="">
+            <Nav.Link
+              onClick={() => navigate("/users")}
+              style={{ color: `${theming.font_color.color}` }}
+              href=""
+            >
               {t("header.eventos")}
             </Nav.Link>
             <Nav.Link style={{ color: `${theming.font_color.color}` }} href="">

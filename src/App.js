@@ -3,8 +3,10 @@ import "./App.scss";
 import "./custom.scss";
 import Landing from "./pages/landing/landing";
 import Login from "./pages/login/login";
+import BoxPage from "./pages/users-pages/box/box-pages";
 import UsersPage from "./pages/users-pages/users/users-pages";
 import Validate from "./pages/validate/validate";
+import PrivateRoute from "./routes/private/private-route";
 //import Footer from './components/footer';
 
 function App() {
@@ -15,6 +17,14 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/validate" element={<Validate />}></Route>
         <Route path="/users" element={<UsersPage />}></Route>
+        <Route
+          path="/boxes"
+          element={
+            <PrivateRoute>
+              <BoxPage />
+            </PrivateRoute>
+          }
+        ></Route>
       </Routes>
     </BrowserRouter>
   );

@@ -9,15 +9,19 @@ import Col from "react-bootstrap/Col";
 import LanguageButton from "../../common-components/language-buton/language-button";
 import NavToggle from "../../common-components/navbar-toggle/navbar-toggle";
 import { LanguageContext } from "../../shared/language/language.context";
-import NavUserButton from "../../common-components/user-drop-down/nav-user-button";
+import NavUserButton from "../../common-components/nav-user-bottom/nav-user-button";
 import { UserContext } from "../../shared/user-info/user.context";
 import { getUserData } from "../../APP/fetch/fetch-functions";
+import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCrosshairs } from "@fortawesome/free-solid-svg-icons";
 
 function Header() {
   const [language, setLanguage] = useContext(LanguageContext);
   const [userData, setUserData] = useContext(UserContext);
   const [t, i18n] = useTranslation("header");
   const [theming] = useContext(ThemingContext);
+  const navigate = useNavigate();
   //setUserLogged(localStorage.getItem("logged"));
   const token = localStorage.getItem("token");
   useEffect(() => {
@@ -58,13 +62,15 @@ function Header() {
           xxl={{ span: 2, offset: 1 }}
         >
           <Navbar.Brand
+            className="link"
+            onClick={() => navigate("/")}
             style={{
               color: `${theming.font_color.color}`,
             }}
             href=""
           >
-            {/* The Best Battles/Be a Warrior */}
-            LOGO+NAME
+            {/* The Best Battles/Be a Warrior */}W
+            <FontAwesomeIcon icon={faCrosshairs}></FontAwesomeIcon>D TARGET
           </Navbar.Brand>
         </Col>
         <Col
@@ -74,7 +80,11 @@ function Header() {
           xxl={{ span: 3, offset: 1 }}
         >
           <Nav className="header-links">
-            <Nav.Link style={{ color: `${theming.font_color.color}` }} href="">
+            <Nav.Link
+              onClick={() => navigate("/users")}
+              style={{ color: `${theming.font_color.color}` }}
+              href=""
+            >
               {t("header.eventos")}
             </Nav.Link>
             <Nav.Link style={{ color: `${theming.font_color.color}` }} href="">

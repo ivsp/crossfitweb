@@ -24,3 +24,8 @@
     @include display-flex(flex,row,"","",1rem);
 
 }
+.link{
+    &:hover{
+        cursor: pointer;
+    }
+}
