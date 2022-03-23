@@ -12,6 +12,7 @@ function CarouselBodyLanding() {
     <Row
       style={{
         padding: "2rem 0rem",
+        margin: "0px",
       }}
     >
       <Col

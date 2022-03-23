@@ -1,0 +1,16 @@
+.event-info_container{
+    display: flex;
+    flex-direction: row;
+    padding: 1rem 0rem;
+    font-family: "rubik-regular";
+}
+
+ @media (max-width: 600px) {
+     .event-info_container {
+         flex-direction: column;
+         gap: 1.5rem;
+    }
+    .change-image-button{
+        width: max-content;
+    }
+   }

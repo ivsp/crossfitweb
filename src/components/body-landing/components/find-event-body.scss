@@ -1,0 +1,38 @@
+.row_container{
+    background-color: #e2e2e2;
+    padding: 2rem 0rem;
+}
+
+.find-event_container{
+    width: 100%;
+}
+.find-event_container-parr{
+    font-family: "rubik-regular";   
+}
+
+.find-event_container-title{
+   
+    font-family: "rubik-semibold";
+    font-size: 2.5rem;
+    padding: 1.5rem 0rem;
+}
+
+.button_container{
+    display: flex;
+    align-items: center;
+}
+
+
+.event_button{
+    width: 100%;
+    color: #ffffff;
+    font-family: "rubik-regular";
+    padding: 1rem 0.5rem;
+}
+
+.cards_container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}

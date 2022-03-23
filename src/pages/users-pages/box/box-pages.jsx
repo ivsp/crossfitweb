@@ -1,5 +1,16 @@
+import React from "react";
+import BodyBox from "../../../components/body-boxes/body-boxes";
+import Footer from "../../../components/footer/footer";
+import Header from "../../../components/header/header";
+
 function BoxPage() {
-  return <h1>PÁGINA DE BOXES</h1>;
+  return (
+    <React.Fragment>
+      <Header></Header>
+      <BodyBox></BodyBox>
+      <Footer></Footer>
+    </React.Fragment>
+  );
 }
 
 export default BoxPage;

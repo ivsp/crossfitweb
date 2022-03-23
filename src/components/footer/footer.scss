@@ -1,7 +1,27 @@
 .footer_container{
- height: "5vh";
- background-color: "black";
+ 
+ background-color: #7a7a7a;
  margin-top: "auto";
  color: "white";
+ padding-top: 1.5rem;
+ padding-bottom: 0.3rem;
+ font-family: "rubik-regular";
  
+}
+
+.icons{
+    font-size: 2rem;
+    color: #FFFFFF;
+    opacity: 0.5;
+    &:hover{
+        cursor: pointer;
+    }
+}
+.text_footer{
+    color: #FFFFFF;
+    opacity: 0.5;
+    &:hover{
+        cursor: pointer;
+    }
+
 }

@@ -1,0 +1,26 @@
+.card__container{
+    width: 30%;
+    min-width: 300px;
+    border-radius: 10px;
+    padding-bottom: 0.5rem;
+}
+
+.image_container{
+    
+    height: 200px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card-body__container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.card-body_tittle{
+    font-family: "rubik-semibold";
+}
+
+.card-body_parr{
+    font-family: "rubik-regular";
+}

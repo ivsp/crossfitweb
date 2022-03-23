@@ -37,7 +37,6 @@ function LogInCenteredModal(props) {
       navigate("/boxes");
     }
   };
-
   return (
     <Modal
       {...props}

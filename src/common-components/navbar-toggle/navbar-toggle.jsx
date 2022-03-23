@@ -15,7 +15,6 @@ function NavToggle() {
   const [modalLoginShow, setModalLoginShow] = useState(false);
 
   const [theming] = useContext(ThemingContext);
-
   return (
     <React.Fragment>
       <Navbar className="navbar__container p-0" expand="none">
@@ -34,7 +33,7 @@ function NavToggle() {
               style={{
                 position: "absolute",
                 top: "3rem",
-                zIndex: "1",
+                zIndex: "2",
                 right: "0.5rem",
                 backgroundColor: "white",
                 borderRadius: "10px",

@@ -52,6 +52,7 @@ function Header() {
         style={{
           fontFamily: "rubik-semibold",
           fontSize: "1rem",
+          paddingTop: "0.3rem",
         }}
         fluid
       >
@@ -67,13 +68,15 @@ function Header() {
             style={{
               color: `${theming.font_color.color}`,
             }}
-            href=""
           >
             {/* The Best Battles/Be a Warrior */}W
             <FontAwesomeIcon icon={faCrosshairs}></FontAwesomeIcon>D TARGET
           </Navbar.Brand>
         </Col>
         <Col
+          className="d-none d-lg-block"
+          xs={{ span: 3, offset: 1 }}
+          sm={{ span: 3, offset: 1 }}
           md={{ span: 3, offset: 1 }}
           lg={{ span: 3, offset: 1 }}
           xl={{ span: 3, offset: 1 }}

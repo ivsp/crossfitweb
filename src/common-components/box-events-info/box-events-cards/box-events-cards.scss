@@ -1,0 +1,33 @@
+.display-events{
+    display: flex;
+    
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+}
+
+.events-card__container{
+    font-family: "rubik-regular";
+    min-width: 25%;
+}
+.events-body__container{
+display: flex;
+flex-direction: column;
+
+}
+
+.card-body_parr{
+    margin: 0px;
+}
+
+.colorgey{
+    color: #6d6d6d;
+}
+
+.padding-bottom{
+    padding-bottom: 0.5rem;
+}
+.Xscroll{
+    overflow-x: auto;
+}
+

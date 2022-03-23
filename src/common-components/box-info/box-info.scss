@@ -1,0 +1,51 @@
+.box-info_container{
+   
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    
+    gap: 1rem;
+    padding: 2rem 1rem;
+    font-family: "rubik-regular";
+    
+}
+
+.image_container{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 30%;
+}
+
+.image_profile{
+    width: 200px;
+    height: 200px;
+}
+.location-data_container{
+    display: flex;
+    gap: 2rem;
+    width: max-content;
+    
+}
+
+.tittle-description{
+    font-family: "rubik-regular";
+    margin: 0px;
+    color: #555555;
+}
+
+.tittle-value{
+    font-family: "rubik-semibold";
+    padding-bottom: 0.5rem;
+}
+
+.box-name{
+    font-family: "rubik-bold";
+}
+
+.flex-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
