@@ -7,7 +7,6 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../shared/user-info/user.context";
 import { useTranslation } from "react-i18next";
-import { logOutUser } from "../../APP/fetch/fetch-functions";
 import LateralMenu from "../../pages/users-pages/users/menu-desplegable/menu-desplegable";
 
 function NavUserButton(props) {
@@ -21,8 +20,7 @@ function NavUserButton(props) {
   const handleShow = () => setShow(true);
   const logOut = async () => {
     const token = localStorage.getItem("token");
-    const data = await logOutUser(token);
-    if (data) {
+    if (token) {
       localStorage.removeItem("token");
       navigate("/");
     }
@@ -58,18 +56,45 @@ function NavUserButton(props) {
           }}
           className="flex-column "
         >
-          <Nav.Link className="nav_link p-3">
-            {t("menu_lateral.eventos")}
-          </Nav.Link>
-          <Nav.Link
-            className="nav_link p-3"
-            onClick={() => setModalMenuShow(true)}
-          >
-            {t("menu_lateral.datos")}
-          </Nav.Link>
-          <Nav.Link className="nav_link p-3" onClick={logOut}>
-            {t("menu_lateral.cerrar_sesion")}
-          </Nav.Link>
+          {userData.type === "user" ? (
+            <>
+              <Nav.Link className="nav_link p-3">
+                {t("menu_lateral.user_eventos")}
+              </Nav.Link>
+              <Nav.Link
+                className="nav_link p-3"
+                onClick={() => setModalMenuShow(true)}
+              >
+                {t("menu_lateral.user_datos")}
+              </Nav.Link>
+              <Nav.Link className="nav_link p-3" onClick={logOut}>
+                {t("menu_lateral.cerrar_sesion")}
+              </Nav.Link>
+            </>
+          ) : (
+            <>
+              <Nav.Link
+                onClick={() => {
+                  navigate("/boxes");
+                  setShow(false);
+                }}
+                className="nav_link p-3"
+              >
+                {t("menu_lateral.box_datos")}
+              </Nav.Link>
+
+              <Nav.Link
+                className="nav_link p-3"
+                onClick={() => {
+                  logOut();
+                  navigate("/");
+                  setShow(false);
+                }}
+              >
+                {t("menu_lateral.cerrar_sesion")}
+              </Nav.Link>
+            </>
+          )}
         </Nav>
       </Offcanvas>
 

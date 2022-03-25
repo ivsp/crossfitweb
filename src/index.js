@@ -14,6 +14,7 @@ import users_en from "./routes/i18n/translations/en/users.json";
 import { I18nextProvider } from "react-i18next";
 import LanguageProvider from "./shared/language/language.provider";
 import UserProvider from "./shared/user-info/user.provider";
+import EventProvider from "./shared/event-info/event.provider";
 
 i18next.init({
   interpolation: { escapeValue: false },
@@ -41,7 +42,9 @@ ReactDOM.render(
       <ThemingProvider>
         <LanguageProvider>
           <UserProvider>
-            <App />
+            <EventProvider>
+              <App />
+            </EventProvider>
           </UserProvider>
         </LanguageProvider>
       </ThemingProvider>

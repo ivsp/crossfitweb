@@ -8,14 +8,137 @@ import Form from "react-bootstrap/Form";
 import { useContext } from "react";
 import { ThemingContext } from "../../../../shared/theming/theming.context";
 import giraldaCr from "./../../../../assets/images/boxes/giralda.png";
+import { EventContext } from "../../../../shared/event-info/event.context";
+import { createNewEvent } from "../../../../APP/fetch/fetch-functions";
+import { getCurrentDate } from "../../../../APP/functions/functions";
 function AddEvent({ show, setShow }) {
   const [theming] = useContext(ThemingContext);
-
+  const [currentEventsData, setCurrentEventsData] = useContext(EventContext);
+  async function addEvents(body, token) {
+    const events = await createNewEvent(body, token);
+    setCurrentEventsData([...currentEventsData, events]);
+    console.log(events);
+  }
+  console.log(new Date().getTime());
   const addEvent = (e) => {
     e.preventDefault();
-    console.log("subi el evento");
-    //hago el post
-    setShow(false);
+
+    if (
+      new Date(e.target.eventStartDate.value).getTime() >=
+      new Date(e.target.eventEndDate.value).getTime()
+    ) {
+      alert(
+        "la fecha de inicio del evento debe ser inferior a la de finalizacion "
+      );
+    } else if (
+      new Date(e.target.clasificationStartDate.value).getTime() >=
+      new Date(e.target.eventEndDate.value).getTime()
+    ) {
+      alert(
+        "la fecha de inicio del clasificatorio debe ser inferior a la de finalizacion del evento"
+      );
+    } else if (
+      new Date(e.target.clasificationEndDate.value).getTime() <=
+      new Date(e.target.clasificationStartDate.value).getTime()
+    ) {
+      alert(
+        "la fecha de fin del clafificatorio debe ser superior a la de inicio"
+      );
+    } else if (
+      new Date(e.target.clasificationEndDate.value).getTime() >=
+      new Date(e.target.eventEndDate.value).getTime()
+    ) {
+      alert(
+        "la fecha de inicio del clafificatorio no puede ser superior a la de finalización del evento"
+      );
+    } else if (
+      new Date(e.target.semifinalStartDate.value).getTime() <=
+      new Date(e.target.clasificationEndDate.value).getTime()
+    ) {
+      alert(
+        "la fecha de inicio de la semifinal debe ser superior a la de finalización del clasificatorio"
+      );
+    } else if (
+      new Date(e.target.semifinalStartDate.value).getTime() >
+      new Date(e.target.eventEndDate.value).getTime()
+    ) {
+      alert(
+        "la fecha de inicio de la semifinal no puede ser superior a la de finalización del evento"
+      );
+    } else if (
+      new Date(e.target.semifinalEndDate.value).getTime() <=
+      new Date(e.target.semifinalStartDate.value).getTime()
+    ) {
+      alert("la fecha de fin de la semifinal debe ser superior a la de inicio");
+    } else if (
+      new Date(e.target.semifinalEndDate.value).getTime() >
+      new Date(e.target.eventEndDate.value).getTime()
+    ) {
+      alert(
+        "la fecha de fin de la semifinal debe no puede ser superior a la de finalizacion del evento"
+      );
+    } else if (
+      new Date(e.target.finalStartDate.value).getTime() <=
+      new Date(e.target.semifinalEndDate.value).getTime()
+    ) {
+      alert(
+        "la fecha de inicio de la final debe ser superior a la de fin de la semifinal"
+      );
+    } else if (
+      new Date(e.target.finalStartDate.value).getTime() >=
+      new Date(e.target.eventEndDate.value).getTime()
+    ) {
+      alert(
+        "la fecha de inicio de la final no puede ser superior a la de fin del evento"
+      );
+    } else if (
+      new Date(e.target.finalEndDate.value).getTime() <=
+      new Date(e.target.finalStartDate.value).getTime()
+    ) {
+      alert("la fecha de fin de la final debe ser superior a la de inicio");
+    } else if (
+      new Date(e.target.finalEndDate.value).getTime() >
+      new Date(e.target.eventEndDate.value).getTime()
+    ) {
+      alert(
+        "la fecha de fin de la final no puede ser superior a la de finalización del evento"
+      );
+    } else {
+      const token = localStorage.getItem("token");
+      const body = {
+        eventName: e.target.eventName.value,
+        eventCity: e.target.eventCity.value,
+        eventAddres: e.target.eventAddres.value,
+        eventStartDate: new Date(e.target.eventStartDate.value).getTime(),
+        eventEndDate: new Date(e.target.eventEndDate.value).getTime(),
+        eventLimitPerson: e.target.eventLimitPerson.value,
+        eventJoinPerson: [],
+        eliteCategory: e.target.elite_category.checked,
+        rxCategory: e.target.rx_category.checked,
+        scCategory: e.target.sc_category.checked,
+        teamCategory: e.target.team_category.checked,
+        shortDescription: e.target.shortDescription.value,
+        longDescription: e.target.longDescription.value,
+        clasificationType: e.target.clasificationType.value,
+        clasificationStartDate: new Date(
+          e.target.clasificationStartDate.value
+        ).getTime(),
+        clasificationEndDate: new Date(
+          e.target.clasificationEndDate.value
+        ).getTime(),
+        semifinalType: e.target.semifinalType.value,
+        semifinalStartDate: new Date(
+          e.target.semifinalStartDate.value
+        ).getTime(),
+        semifinalEndDate: new Date(e.target.semifinalEndDate.value).getTime(),
+        finalType: e.target.finalType.value,
+        finalStartDate: new Date(e.target.finalStartDate.value).getTime(),
+        finalEndDate: new Date(e.target.finalEndDate.value).getTime(),
+      };
+
+      addEvents(body, token);
+      setShow(false);
+    }
   };
   return (
     <Modal
@@ -116,7 +239,7 @@ function AddEvent({ show, setShow }) {
                     <Form.Group className="mb-3" controlId="formBasicCity">
                       <Form.Label>Ciudad</Form.Label>
                       <Form.Control
-                        nme="eventCity"
+                        name="eventCity"
                         type="city"
                         placeholder="Enter the city"
                         required
@@ -125,9 +248,9 @@ function AddEvent({ show, setShow }) {
                     <Form.Group className="mb-3" controlId="formBasicDirection">
                       <Form.Label>Dirección</Form.Label>
                       <Form.Control
-                        name="EventDirection"
-                        type="direction"
-                        placeholder="Enter a direction"
+                        name="eventAddres"
+                        type="addres"
+                        placeholder="Enter a addres"
                         required
                       />
                     </Form.Group>
@@ -146,8 +269,8 @@ function AddEvent({ show, setShow }) {
                       <Form.Control
                         name="eventStartDate"
                         type="date"
-                        placeholder="Enter a direction"
                         required
+                        min={getCurrentDate()}
                       />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicDate">
@@ -155,8 +278,8 @@ function AddEvent({ show, setShow }) {
                       <Form.Control
                         name="eventEndDate"
                         type="date"
-                        placeholder="Enter a direction"
                         required
+                        min={getCurrentDate()}
                       />
                     </Form.Group>
                   </Col>
@@ -174,8 +297,39 @@ function AddEvent({ show, setShow }) {
                         name="eventLimitPerson"
                         type="number"
                         placeholder="Enter a number"
+                        min="10"
                         required
                       />
+                    </Form.Group>
+                    <Form.Group
+                      className="mb-3 "
+                      controlId="formBasicCheckbox"
+                      required
+                    >
+                      <Form.Label>Categoría:</Form.Label>
+
+                      <div className="d-flex gap-2">
+                        <Form.Check
+                          name="elite_category"
+                          type="checkbox"
+                          label="Elite"
+                        />
+                        <Form.Check
+                          name="rx_category"
+                          type="checkbox"
+                          label="RX"
+                        />
+                        <Form.Check
+                          name="sc_category"
+                          type="checkbox"
+                          label="SC"
+                        />
+                        <Form.Check
+                          name="team_category"
+                          type="checkbox"
+                          label="Team"
+                        />
+                      </div>
                     </Form.Group>
                   </Col>
                 </Row>
@@ -248,7 +402,7 @@ function AddEvent({ show, setShow }) {
                     <Col>
                       <Form.Group
                         className="mb-3 "
-                        controlId="formBasicCheckbox"
+                        controlId="formBasicRadio"
                         required
                       >
                         <Form.Label>Clasificacion:</Form.Label>
@@ -274,17 +428,19 @@ function AddEvent({ show, setShow }) {
                         <Form.Group className="mb-3" controlId="formBasicDate">
                           <Form.Label>Fecha de inicio</Form.Label>
                           <Form.Control
-                            name="cladificationStartDate"
+                            name="clasificationStartDate"
                             type="date"
                             required
+                            min={getCurrentDate()}
                           />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicDate">
                           <Form.Label>Fecha de fin</Form.Label>
                           <Form.Control
-                            name="cladificationEndDate"
+                            name="clasificationEndDate"
                             type="date"
                             required
+                            min={getCurrentDate()}
                           />
                         </Form.Group>
                       </div>
@@ -292,7 +448,7 @@ function AddEvent({ show, setShow }) {
                     <Col>
                       <Form.Group
                         className="mb-3 "
-                        controlId="formBasicCheckbox"
+                        controlId="formBasicRadio1"
                         required
                       >
                         <Form.Label>Semi final:</Form.Label>
@@ -318,16 +474,18 @@ function AddEvent({ show, setShow }) {
                         <Form.Group className="mb-3" controlId="formBasicDate">
                           <Form.Label>Fecha de inicio</Form.Label>
                           <Form.Control
-                            name="semiFinalStartDate"
+                            name="semifinalStartDate"
                             type="date"
+                            min={getCurrentDate()}
                             required
                           />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicDate">
                           <Form.Label>Fecha de fin</Form.Label>
                           <Form.Control
-                            name="semiFinalEndDate"
+                            name="semifinalEndDate"
                             type="date"
+                            min={getCurrentDate()}
                             required
                           />
                         </Form.Group>
@@ -336,7 +494,7 @@ function AddEvent({ show, setShow }) {
                     <Col>
                       <Form.Group
                         className="mb-3 "
-                        controlId="formBasicCheckbox"
+                        controlId="formBasicRadio2"
                         required
                       >
                         <Form.Label>Final:</Form.Label>
@@ -364,6 +522,7 @@ function AddEvent({ show, setShow }) {
                           <Form.Control
                             name="finalStartDate"
                             type="date"
+                            min={getCurrentDate()}
                             required
                           />
                         </Form.Group>
@@ -372,6 +531,7 @@ function AddEvent({ show, setShow }) {
                           <Form.Control
                             name="finalEndDate"
                             type="date"
+                            min={getCurrentDate()}
                             required
                           />
                         </Form.Group>

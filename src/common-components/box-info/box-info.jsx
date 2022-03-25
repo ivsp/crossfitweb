@@ -4,11 +4,16 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import giraldaCr from "./../../assets/images/boxes/giralda.png";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ThemingContext } from "../../shared/theming/theming.context";
+import ChangeBoxInfo from "./modals/change-box-info";
+import { UserContext } from "../../shared/user-info/user.context";
 
 function BoxInfo() {
   const [theming] = useContext(ThemingContext);
+  const [modalModifyDataShow, setModalModifyDataShow] = useState(false);
+  const [userData, setUserData] = useContext(UserContext);
+
   return (
     <Row style={{ margin: "0px", height: "fit-content", paddingTop: "1.5rem" }}>
       <Col
@@ -22,37 +27,41 @@ function BoxInfo() {
         <Card className="box-info_container">
           <div className="image_container">
             <Card.Img className="image_profile" variant="top" src={giraldaCr} />
-            <Button variant={theming.primary.color}>Cambiar Imagen</Button>
           </div>
           <Card.Body>
-            <Card.Title className="box-name">Giralda CrossFit</Card.Title>
+            <Card.Title className="box-name">{userData.name}</Card.Title>
             <Card.Text className="tittle-description">Dirección:</Card.Text>
-            <Card.Text className="tittle-value">C/Balbino Marrón 3</Card.Text>
+            <Card.Text className="tittle-value">{userData.addres}</Card.Text>
             <div className="location-data_container">
               <div>
                 <Card.Text className="tittle-description">Cuidad:</Card.Text>
-                <Card.Text className="tittle-value">Sevilla</Card.Text>
+                <Card.Text className="tittle-value">{userData.city}</Card.Text>
               </div>
               <div>
                 <Card.Text className="tittle-description">Provincia:</Card.Text>
-                <Card.Text className="tittle-value">Sevilla</Card.Text>
+                <Card.Text className="tittle-value">
+                  {userData.province}
+                </Card.Text>
               </div>
               <div>
                 <Card.Text className="tittle-description">CP:</Card.Text>
-                <Card.Text className="tittle-value">41018</Card.Text>
+                <Card.Text className="tittle-value">
+                  {userData.postal_code}
+                </Card.Text>
               </div>
             </div>
 
             <div className="flex-container">
               <div>
                 <Card.Text className="tittle-description">Teléfono</Card.Text>
-                <Card.Text className="tittle-value">678154860</Card.Text>
+                <Card.Text className="tittle-value">{userData.phone}</Card.Text>
               </div>
               <Button
                 style={{
                   height: "fit-content",
                 }}
                 variant={theming.primary.color}
+                onClick={() => setModalModifyDataShow(true)}
               >
                 Modificar datos
               </Button>
@@ -60,6 +69,12 @@ function BoxInfo() {
           </Card.Body>
         </Card>
       </Col>
+      <ChangeBoxInfo
+        show={modalModifyDataShow}
+        onHide={() => setModalModifyDataShow(false)}
+        userdata={userData}
+        setUserdata={setUserData}
+      ></ChangeBoxInfo>
     </Row>
   );
 }

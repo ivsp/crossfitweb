@@ -1,8 +1,9 @@
 {
   "menu_lateral": {
-    "eventos": "My events",
-    "datos": "Update my data",
-    "cerrar_sesion": "Log out"
+    "user_eventos": "My events",
+    "user_datos": "Update my data",
+    "cerrar_sesion": "Log out",
+    "box_datos": "My data"
   },
   "actualizar_datos": {
     "mis_datos": "My data",
@@ -19,7 +20,8 @@
     "direccion": "Box's direction",
     "ciudad": "City",
     "provincia": "Province",
-    "cp": "Postal code"
+    "cp": "Postal code",
+    "imagen": "Profile image"
   },
   "eventos": {
     "localización": "Location:",

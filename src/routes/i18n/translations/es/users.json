@@ -1,8 +1,9 @@
 {
   "menu_lateral": {
-    "eventos": "Mis eventos",
-    "datos": "Actualizar mis datos",
-    "cerrar_sesion": "Cerrar sesión"
+    "user_eventos": "Mis eventos",
+    "user_datos": "Actualizar mis datos",
+    "cerrar_sesion": "Cerrar sesión",
+    "box_datos": "Mis datos"
   },
   "actualizar_datos": {
     "mis_datos": "Mis datos",
@@ -19,7 +20,8 @@
     "direccion": "Dirección del box",
     "ciudad": "Ciudad",
     "provincia": "Provincia",
-    "cp": "Código postal"
+    "cp": "Código postal",
+    "imagen": "Imagen de perfil"
   },
   "eventos": {
     "localización": "Localización:",

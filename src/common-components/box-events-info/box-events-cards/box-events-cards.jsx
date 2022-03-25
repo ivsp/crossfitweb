@@ -3,15 +3,50 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThemingContext } from "../../../shared/theming/theming.context";
 import taronja from "./../../../assets/images/taronja.png";
 import madridCship from "./../../../assets/images/events/madridCship.png";
+import ModifyEvent from "../modals/modal-modify-event/modal-modify-event";
+import { EventContext } from "../../../shared/event-info/event.context";
+import { getAllEventsByEmail } from "../../../APP/fetch/fetch-functions";
+import { returnDateByTimeStamp } from "../../../APP/functions/functions";
 
 function BoxEventsCards({ showActive }) {
   const [theming] = useContext(ThemingContext);
-  const activeEvents = [1, 2, 3, 4];
+  const [showModifyEvent, setShowModifyEvent] = useState([]);
+  const [showPastEvents, setShowPastEvents] = useState([]);
+
+  const [
+    currentEventsData,
+    setCurrentEventsData,
+    pastEventsData,
+    setPastEventsData,
+  ] = useContext(EventContext);
+
   const historicEvents = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  async function getCurrentBoxEvents() {
+    const token = localStorage.getItem("token");
+    const events = await getAllEventsByEmail(token);
+    console.log(events);
+    const showEvents = Array(events.length).fill(false);
+    setShowModifyEvent(showEvents);
+    console.log(showEvents);
+    setCurrentEventsData(events);
+  }
+  async function getPastBoxEvents() {
+    const token = localStorage.getItem("token");
+    const events = await getAllEventsByEmail(token);
+    console.log(events);
+    const showEvents = Array(events.length).fill(false);
+    setShowPastEvents(showEvents);
+    console.log(showEvents);
+    setPastEventsData(events);
+  }
+  useEffect(() => {
+    //traer los eventos de la base de datos y actualizar el currentEvents get a /boxes pasando email
+    getCurrentBoxEvents();
+  }, []);
 
   return (
     <Row
@@ -30,7 +65,7 @@ function BoxEventsCards({ showActive }) {
         xxl={{ span: 10, offset: 1 }}
       >
         {showActive
-          ? activeEvents.map((e, i) => {
+          ? currentEventsData?.map((e, i) => {
               return (
                 <Col key={i} xs={10} sm={6} md={5} lg={4} xl={3} xxl={3}>
                   <Card className="events-card__container">
@@ -44,14 +79,15 @@ function BoxEventsCards({ showActive }) {
                     />
                     <Card.Body className="events-body__container">
                       <Card.Title className="card-body_tittle">
-                        Nombre del evento
+                        {e.eventName}
                       </Card.Title>
                       <div className="padding-bottom">
                         <Card.Text className="card-body_parr colorgey">
                           Fecha:
                         </Card.Text>
                         <Card.Text className="card-body_parr ">
-                          15.05.2022 - 17.05.2022
+                          {returnDateByTimeStamp(e.eventStartDate)} -{" "}
+                          {returnDateByTimeStamp(e.eventEndDate)}
                         </Card.Text>
                       </div>
                       <div className="padding-bottom">
@@ -59,7 +95,7 @@ function BoxEventsCards({ showActive }) {
                           Cuidad:
                         </Card.Text>
                         <Card.Text className="card-body_parr ">
-                          Valencia
+                          {e.eventCity}
                         </Card.Text>
                       </div>
                       <div className="padding-bottom">
@@ -67,24 +103,37 @@ function BoxEventsCards({ showActive }) {
                           Descripción:
                         </Card.Text>
                         <Card.Text className="card-body_parr ">
-                          Some quick example text to build on the card title and
-                          make up the bulk of the card's content.
+                          {e.shortDescription}
                         </Card.Text>
                       </div>
                       <div className="padding-bottom">
                         <Card.Text className="card-body_parr colorgey">
                           Atletas:
                         </Card.Text>
-                        <Card.Text className="card-body_parr ">10/25</Card.Text>
+                        <Card.Text className="card-body_parr ">{`${e.eventJoinPerson}/${e.eventLimitPerson}`}</Card.Text>
                       </div>
                       <Button
                         className="event_button"
                         variant={theming.primary.color}
+                        onClick={() => {
+                          showModifyEvent[i] = true;
+                          setShowModifyEvent([
+                            ...showModifyEvent,
+                            showModifyEvent[i],
+                          ]);
+                        }}
                       >
                         Datalles / Modificar
                       </Button>
                     </Card.Body>
                   </Card>
+                  <ModifyEvent
+                    key={i}
+                    showMod={showModifyEvent}
+                    setShowMod={setShowModifyEvent}
+                    eventData={e}
+                    eventposition={i}
+                  ></ModifyEvent>
                 </Col>
               );
             })
@@ -139,7 +188,7 @@ function BoxEventsCards({ showActive }) {
                         className="event_button"
                         variant={theming.primary.color}
                       >
-                        Datalles / Modificar
+                        Ver / Borrar
                       </Button>
                     </Card.Body>
                   </Card>
