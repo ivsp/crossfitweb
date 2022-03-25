@@ -2,10 +2,12 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
+import { useContext } from "react";
+import { UserContext } from "../../../shared/user-info/user.context";
 
 function ChangeBoxInfo(props, { userdata, setUserdata }) {
   const [t] = useTranslation("users");
-
+  const [userData, setUserData] = useContext(UserContext)
   const modifyUserData = () => {
     //aqui haré el fetch a la base de datos una vez tenga implementado el multer
   };
