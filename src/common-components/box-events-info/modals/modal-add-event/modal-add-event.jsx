@@ -18,7 +18,6 @@ function AddEvent({ show, setShow }) {
     const events = await createNewEvent(body, token);
     setCurrentEventsData([...currentEventsData, events]);
     console.log(events);
-    console.log("prueba");
   }
   const addEvent = (e) => {
     e.preventDefault();

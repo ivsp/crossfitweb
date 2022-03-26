@@ -9,9 +9,12 @@ import {
   faTwitterSquare,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
+import { useTranslation } from "react-i18next";
 //<i class="fa-brands fa-twitter-square"></i>
 function Footer() {
   const navigate = useNavigate();
+  const [t] = useTranslation("landing");
+
   return (
     <Row
       className="footer_container"
@@ -107,7 +110,7 @@ function Footer() {
             xl={{ span: 4, offset: 1 }}
             xxl={{ span: 3, offset: 1 }}
           >
-            <p className="text_footer">Politica de privacidad</p>
+            <p className="text_footer">{t("footer.policy")}</p>
           </Col>
           <Col
             onClick={() => navigate("/")}
@@ -118,7 +121,7 @@ function Footer() {
             xl={{ span: 2, offset: 1 }}
             xxl={{ span: 2, offset: 1 }}
           >
-            <p className="text_footer">Contacto</p>
+            <p className="text_footer">{t("footer.contact")}</p>
           </Col>
         </Row>
       </Col>

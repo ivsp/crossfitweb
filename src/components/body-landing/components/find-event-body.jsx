@@ -13,10 +13,13 @@ import BoxesCards from "../../../common-components/boxes-cards/boxes-cards";
 import giralda from "./../../../assets/images/boxes/giralda.png";
 import underground from "./../../../assets/images/boxes/underground.png";
 import muralla from "./../../../assets/images/boxes/muralla.jpg";
+import { useTranslation } from "react-i18next";
 
 function FindEvent() {
   const [theming] = useContext(ThemingContext);
   const navigate = useNavigate();
+  const [t] = useTranslation("landing");
+
   const cities = ["Madrid", "Sevilla", "Málaga"];
   const events = [madridCship, andalusiImg, malagaTd];
   const boxes = [giralda, underground, muralla];
@@ -43,15 +46,13 @@ function FindEvent() {
         >
           <div className="find-event_container">
             <h2 className="find-event_container-title">
-              Encuentra un Evento cerca de ti
+              {t("events_area.events_area_tittle")}
             </h2>
             <p className="find-event_container-parr">
-              Ya son más de 200 propietarios de centros deportivos de diferentes
-              ciudades españolas ofreciendo eventos de diferentes categorías.
+              {t("events_area.events_area_body1")}
             </p>
             <p className="find-event_container-parr">
-              Todos ellos unidos en torno a un objetivo común. Hacer visible
-              este deporte y a la gran cantidad de atletas desonocidos.
+              {t("events_area.events_area_body2")}
             </p>
           </div>
         </Col>
@@ -69,7 +70,7 @@ function FindEvent() {
             className="event_button"
             variant={theming.soft_details.color}
           >
-            Encuentra un evento
+            {t("events_area.events_area_button")}
           </Button>
         </Col>
       </Row>
@@ -87,7 +88,9 @@ function FindEvent() {
           xl={{ span: 5, offset: 7 }}
           xxl={{ span: 4, offset: 7 }}
         >
-          <h2 className="find-event_container-title">Eventos populares</h2>
+          <h2 className="find-event_container-title">
+            {t("events_area.popular_events_tittle")}
+          </h2>
         </Col>
         <Col>
           <Row>
@@ -125,7 +128,9 @@ function FindEvent() {
           xl={{ span: 10, offset: 1 }}
           xxl={{ span: 10, offset: 1 }}
         >
-          <h2 className="find-event_container-title">Opiniones de los boxes</h2>
+          <h2 className="find-event_container-title">
+            {t("boxes_area.boxes_area_tittle")}
+          </h2>
         </Col>
         <Col>
           <Row>

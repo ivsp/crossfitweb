@@ -1,0 +1,26 @@
+{
+  "carousel": {
+    "banner_text1_tittle": "WHAT'S WOD TARGET?",
+    "banner_text1_body": "Wod Target was born as a place of connection between sports centres and CrossFit and CrossTraining lovers. With the aim of creating a strong community where users can share experiences.",
+    "banner_text2_tittle": "WHY CHOOSE WOD TARGET?",
+    "banner_text2_body": "Wod Target is the best place to find the most popular CrossFit events. It is a place to bring out the beast in you and become a great athlete.",
+    "banner_text3_tittle": "WHAT IS ITS GOAL?",
+    "banner_text3_body": "It is the perfect place to meet new people, achieve your goals and enjoy the good atmosphere that characterises this sport."
+  },
+  "events_area": {
+    "events_area_tittle": "Find an event near you",
+    "events_area_body1": "There are more than 200 owners of sports centres in different Spanish cities offering events of different categories.",
+    "events_area_body2": "All of them united around a common goal. To make this sport and the great number of unknown athletes visible.",
+    "events_area_button": "Find an event",
+    "popular_events_tittle": "Populars events",
+    "popular_events_button": "Go to this event"
+  },
+  "boxes_area": {
+    "boxes_area_tittle": "Opinions of the boxes"
+  },
+  "footer": {
+    "copy": "Copyright © 2021 - www.targetwod.com",
+    "policy": "Privacy policy",
+    "contact": "Contact"
+  }
+}

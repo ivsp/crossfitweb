@@ -3,9 +3,11 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useContext } from "react";
 import { ThemingContext } from "../../shared/theming/theming.context";
+import { useTranslation } from "react-i18next";
 
 function CitiesCards({ city, image }) {
   const [theming] = useContext(ThemingContext);
+  const [t] = useTranslation("landing");
 
   return (
     <Card className="card__container">
@@ -24,7 +26,7 @@ function CitiesCards({ city, image }) {
           bulk of the card's content.
         </Card.Text>
         <Button className="event_button" variant={theming.soft_details.color}>
-          Ir al evento
+          {t("events_area.popular_events_button")}
         </Button>
       </Card.Body>
     </Card>

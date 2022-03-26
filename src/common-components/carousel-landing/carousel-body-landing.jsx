@@ -6,8 +6,11 @@ import image1 from "../../assets/images/landing/image1.jpg";
 import image2 from "../../assets/images/landing/image2.jpg";
 import image3 from "../../assets/images/landing/image3.jpg";
 import image4 from "../../assets/images/landing/image4.jpg";
+import { useTranslation } from "react-i18next";
 
 function CarouselBodyLanding() {
+  const [t] = useTranslation("landing");
+
   return (
     <Row
       style={{
@@ -32,12 +35,12 @@ function CarouselBodyLanding() {
             />
             <Carousel.Caption>
               <div className="container_data">
-                <h2 className="carousel_tittle"> ¿QUÉ ES WOD TARGET?</h2>
+                <h2 className="carousel_tittle">
+                  {" "}
+                  {t("carousel.banner_text1_tittle")}
+                </h2>
                 <p className="carousel_text">
-                  Wod Target nace como un lugar de conexión entre los centros
-                  deportivos y los amantes del CrossFit y el CrossTraining. Con
-                  el objetivo de crear una comunidad sólida donde los usuarios
-                  puedan compartir experiecias.
+                  {t("carousel.banner_text1_body")}
                 </p>
               </div>
             </Carousel.Caption>
@@ -51,11 +54,11 @@ function CarouselBodyLanding() {
 
             <Carousel.Caption>
               <div className="container_data">
-                <h2 className="carousel_tittle">¿POR QUÉ WOD TARGET?</h2>
+                <h2 className="carousel_tittle">
+                  {t("carousel.banner_text2_tittle")}
+                </h2>
                 <p className="carousel_text">
-                  Wod Target es la web ideal para encontrar los mejores eventos
-                  de CrossFit, un lugar para sacar esa bestia que llevas dentro
-                  y convertirte en un gran atleta.
+                  {t("carousel.banner_text2_body")}
                 </p>
               </div>
             </Carousel.Caption>
@@ -69,11 +72,11 @@ function CarouselBodyLanding() {
 
             <Carousel.Caption>
               <div className="container_data">
-                <h2 className="carousel_tittle">¿CUÁL ES SU OBJETIVO?</h2>
+                <h2 className="carousel_tittle">
+                  {t("carousel.banner_text3_tittle")}
+                </h2>
                 <p className="carousel_text">
-                  Es el lugar perfecto para conocer a nuevas personas, conseguir
-                  tus metas y disfrutar del buen ambiente que caracteriza a este
-                  deporte.
+                  {t("carousel.banner_text3_body")}
                 </p>
               </div>
             </Carousel.Caption>
