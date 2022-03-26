@@ -7,15 +7,11 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import BoxEventsCards from "./box-events-cards/box-events-cards";
 import AddEvent from "./modals/modal-add-event/modal-add-event";
-import { UserContext } from "../../shared/user-info/user.context";
-import { EventContext } from "../../shared/event-info/event.context";
 
 function BoxEventsInfo() {
   const [theming] = useContext(ThemingContext);
   const [showActiveEvents, setShowActEvents] = useState(true);
   const [showAddEvent, setShowAddEvent] = useState(false);
-  const [userData, setUserData] = useContext(UserContext);
-  const [eventData, setEventData] = useContext(EventContext);
 
   useEffect(() => {
     //hago un get para obtener los eventos de la base de datos. Todos los eventos

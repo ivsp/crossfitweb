@@ -67,8 +67,24 @@ function BoxEventsCards({ showActive }) {
         {showActive
           ? currentEventsData?.map((e, i) => {
               return (
-                <Col key={i} xs={10} sm={6} md={5} lg={4} xl={3} xxl={3}>
-                  <Card className="events-card__container">
+                <Col
+                  key={i}
+                  xs={10}
+                  sm={6}
+                  md={5}
+                  lg={4}
+                  xl={3}
+                  xxl={3}
+                  style={{
+                    height: "100%",
+                  }}
+                >
+                  <Card
+                    className="events-card__container"
+                    style={{
+                      height: "100%",
+                    }}
+                  >
                     <Card.Img
                       style={{
                         width: "100%",

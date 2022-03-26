@@ -17,6 +17,12 @@ import {
 
 function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
   const [theming] = useContext(ThemingContext);
+  const [
+    currentEventsData,
+    setCurrentsEventsData,
+    pastEventsData,
+    setPastEventsData,
+  ] = useContext(EventContext);
 
   async function modifyCurrentEvent(body, token, currentName) {
     const eventModified = await modifyEvent(body, token, currentName);
@@ -140,7 +146,11 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
       };
       console.log(body);
 
-      modifyCurrentEvent(body, token, eventData.eventName);
+      const data = modifyCurrentEvent(body, token, eventData.eventName);
+      if (data) {
+        //controlar que se ha obtenido el evento y no falla el fetch
+        setCurrentsEventsData({ ...currentEventsData, data });
+      }
       showMod[eventposition] = false;
       setShowMod([...showMod, showMod[eventposition]]);
     }

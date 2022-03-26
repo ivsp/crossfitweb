@@ -2,7 +2,6 @@ import "./carousel-body-landing.scss";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Carousel from "react-bootstrap/Carousel";
-import image1 from "../../assets/images/landing/image1.jpg";
 import image2 from "../../assets/images/landing/image2.jpg";
 import image3 from "../../assets/images/landing/image3.jpg";
 import image4 from "../../assets/images/landing/image4.jpg";

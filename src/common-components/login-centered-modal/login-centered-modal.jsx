@@ -21,6 +21,7 @@ function LogInCenteredModal(props) {
       email: e.target.email.value,
       password: e.target.password.value,
     };
+    console.log(body);
     const data = await logInUser(body);
     setUserData(data);
 

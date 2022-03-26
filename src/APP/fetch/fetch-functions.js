@@ -27,9 +27,11 @@ export async function logInUser(body) {
     },
   });
   if (r.status !== 201) {
+    console.log(r);
     return r;
   } else {
     const data = await r.json();
+    console.log(data);
     return data;
   }
 }
