@@ -2,6 +2,8 @@
   "alert": {
     "login_incorrecto": "El email o la contraseña son incorrectos",
     "creacion_usuario": "Le hemos enviado un mensaje a su correo electrónico. Por favor, haga clic en el enlace para validar su cuenta.",
-    "usuarioexistente": "Esta cuenta de correo electrónico ya existe. Por favor, elija otra o entre en su cuenta."
+    "usuarioexistente": "Esta cuenta de correo electrónico ya existe. Por favor, elija otra o entre en su cuenta.",
+    "usuarioapuntado": "El usuario ya se ha apuntado a este evento",
+    "usuarioapuntado1": "Se ha inscrito correctamente al usuario"
   }
 }

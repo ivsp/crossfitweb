@@ -21,6 +21,10 @@ $neutral-100: #CCCCCC !default;
 $neutral-200: #999999 !default;
 $neutral-300: #696969 !default;
 $font-color: #FFFFFF !default;
+$warning: #fdcb4b !default;
+$succses: #7cff6b !default;
+
+
 
 
 //reseteo los inputs
@@ -86,6 +90,10 @@ $theme-colors: (
         "neutral-200":      $neutral-200,
         "neutral-300":      $neutral-300,
         "font-color":       $font-color,
+        "warning":          $warning,
+        "succses":          $succses
+
+
 
     // "primary-100": $primary-100,
     // "primary-200": $primary-200,

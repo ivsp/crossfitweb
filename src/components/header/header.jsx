@@ -1,5 +1,5 @@
 import "./header.scss";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { ThemingContext } from "../../shared/theming/theming.context";
 import Navbar from "react-bootstrap/Navbar";
@@ -10,31 +10,16 @@ import LanguageButton from "../../common-components/language-buton/language-butt
 import NavToggle from "../../common-components/navbar-toggle/navbar-toggle";
 import { LanguageContext } from "../../shared/language/language.context";
 import NavUserButton from "../../common-components/nav-user-bottom/nav-user-button";
-import { UserContext } from "../../shared/user-info/user.context";
-import { getUserData } from "../../APP/fetch/fetch-functions";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrosshairs } from "@fortawesome/free-solid-svg-icons";
 
 function Header() {
   const [language, setLanguage] = useContext(LanguageContext);
-  const [userData, setUserData] = useContext(UserContext);
   const [t, i18n] = useTranslation("header");
   const [theming] = useContext(ThemingContext);
   const navigate = useNavigate();
-  //setUserLogged(localStorage.getItem("logged"));
   const token = localStorage.getItem("token");
-  useEffect(() => {
-    //obtengo el token del session
-
-    //hacer un get para tener los datos del usuario
-    async function fetchData(token) {
-      const userdata = await getUserData(token);
-      setUserData(userdata);
-    }
-    fetchData(token);
-  }, []);
-
   const onchangeLanguage = (e) => {
     console.log(e.target.id);
     if (e.target.id === "EN") {
@@ -84,7 +69,7 @@ function Header() {
         >
           <Nav className="header-links">
             <Nav.Link
-              onClick={() => navigate("/users")}
+              onClick={() => navigate("/events")}
               style={{ color: `${theming.font_color.color}` }}
               href=""
             >

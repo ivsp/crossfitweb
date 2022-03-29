@@ -8,28 +8,23 @@ import Form from "react-bootstrap/Form";
 import { useContext } from "react";
 import { ThemingContext } from "../../../../shared/theming/theming.context";
 import giraldaCr from "./../../../../assets/images/boxes/giralda.png";
-import { EventContext } from "../../../../shared/event-info/event.context";
-import { modifyEvent } from "../../../../APP/fetch/fetch-functions";
+
 import {
   getCurrentDate,
   returnDateByTimeStamp,
 } from "../../../../APP/functions/functions";
+import { useTranslation } from "react-i18next";
 
-function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
+function ModifyEvent({
+  showMod,
+  setShowMod,
+  eventData,
+  eventposition,
+  modifyCurrentEvent,
+}) {
   const [theming] = useContext(ThemingContext);
-  const [
-    currentEventsData,
-    setCurrentsEventsData,
-    pastEventsData,
-    setPastEventsData,
-  ] = useContext(EventContext);
+  const [t] = useTranslation("users");
 
-  async function modifyCurrentEvent(body, token, currentName) {
-    const eventModified = await modifyEvent(body, token, currentName);
-    //setCurrentEventsData([...currentEventsData, eventModified]);
-    console.log(eventModified);
-  }
-  console.log(returnDateByTimeStamp(eventData.eventStartDate));
   const modEvent = (e) => {
     e.preventDefault();
 
@@ -122,6 +117,7 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
         eventStartDate: new Date(e.target.eventStartDate.value).getTime(),
         eventEndDate: new Date(e.target.eventEndDate.value).getTime(),
         eventLimitPerson: e.target.eventLimitPerson.value,
+        // eventJoinPerson: eventData.eventJoinPerson,
         eliteCategory: e.target.elite_category.checked,
         rxCategory: e.target.rx_category.checked,
         scCategory: e.target.sc_category.checked,
@@ -144,18 +140,12 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
         finalStartDate: new Date(e.target.finalStartDate.value).getTime(),
         finalEndDate: new Date(e.target.finalEndDate.value).getTime(),
       };
-      console.log(body);
 
-      const data = modifyCurrentEvent(body, token, eventData.eventName);
-      if (data) {
-        //controlar que se ha obtenido el evento y no falla el fetch
-        setCurrentsEventsData({ ...currentEventsData, data });
-      }
+      modifyCurrentEvent(body, token, eventData.eventName);
       showMod[eventposition] = false;
       setShowMod([...showMod, showMod[eventposition]]);
     }
   };
-  //devolver un .map??
   return (
     <Modal
       show={showMod[eventposition]}
@@ -177,7 +167,7 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
             padding: "1rem",
           }}
         >
-          Modificar el evento
+          {t("eventInfo.evModTittle")}
         </Modal.Title>
         {/* <Modal.Body>Modal body content</Modal.Body> */}
       </Modal.Header>
@@ -247,7 +237,7 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
                     xxl={{ span: 4, offset: 0 }}
                   >
                     <Form.Group className="mb-3" controlId="formBasicName">
-                      <Form.Label>Nombre</Form.Label>
+                      <Form.Label>{t("eventInfo.evName")}</Form.Label>
                       <Form.Control
                         name="eventName"
                         type="name"
@@ -256,7 +246,7 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
                       />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicCity">
-                      <Form.Label>Ciudad</Form.Label>
+                      <Form.Label>{t("eventInfo.evCity")}</Form.Label>
                       <Form.Control
                         name="eventCity"
                         type="city"
@@ -265,7 +255,7 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
                       />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicDirection">
-                      <Form.Label>Dirección</Form.Label>
+                      <Form.Label>{t("eventInfo.evDirection")}</Form.Label>
                       <Form.Control
                         name="eventAddres"
                         type="direction"
@@ -284,7 +274,7 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
                     xxl={{ span: 4, offset: 0 }}
                   >
                     <Form.Group className="mb-3" controlId="formBasicDate">
-                      <Form.Label>Fecha de inicio</Form.Label>
+                      <Form.Label>{t("eventInfo.evStartDate")}</Form.Label>
                       <Form.Control
                         name="eventStartDate"
                         type="date"
@@ -296,7 +286,7 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
                       />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicDate">
-                      <Form.Label>Fecha de fin</Form.Label>
+                      <Form.Label>{t("eventInfo.evEndDate")}</Form.Label>
                       <Form.Control
                         name="eventEndDate"
                         type="date"
@@ -317,7 +307,7 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
                     xxl={{ span: 4, offset: 0 }}
                   >
                     <Form.Group className="mb-3" controlId="formBasicNumber">
-                      <Form.Label>Límite de participantes:</Form.Label>
+                      <Form.Label>{t("eventInfo.evLimAsistant")}</Form.Label>
                       <Form.Control
                         name="eventLimitPerson"
                         type="number"
@@ -327,7 +317,7 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
                       />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicNumber">
-                      <Form.Label>Participantes apuntados:</Form.Label>
+                      <Form.Label>{t("eventInfo.evAsistants")}</Form.Label>
                       <Form.Control
                         name="join_atlhete"
                         type="number"
@@ -340,7 +330,7 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
                       controlId="formBasicCheckbox"
                       required
                     >
-                      <Form.Label>Categoría:</Form.Label>
+                      <Form.Label>{t("eventInfo.evCategory")}</Form.Label>
 
                       <div className="d-flex gap-2">
                         <Form.Check
@@ -409,7 +399,7 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
                   xxl={{ span: 6, offset: 0 }}
                 >
                   <Form.Group className="mb-3" controlId="formBasicText">
-                    <Form.Label>Descripción corta:</Form.Label>
+                    <Form.Label>{t("eventInfo.evShortDescript")}</Form.Label>
                     <Form.Control
                       as="textarea"
                       name="shortDescription"
@@ -420,7 +410,7 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
                     />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicText">
-                    <Form.Label>Descripción larga:</Form.Label>
+                    <Form.Label>{t("eventInfo.evLongDescript")}</Form.Label>
                     <Form.Control
                       as="textarea"
                       name="longDescription"
@@ -445,7 +435,9 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
                         controlId="formBasicRadio"
                         required
                       >
-                        <Form.Label>Clasificacion:</Form.Label>
+                        <Form.Label>
+                          {t("eventInfo.evClasification")}
+                        </Form.Label>
 
                         <div className="d-flex gap-2">
                           <Form.Check
@@ -476,7 +468,7 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
                       </Form.Group>
                       <div className="d-flex gap-2">
                         <Form.Group className="mb-3" controlId="formBasicDate">
-                          <Form.Label>Fecha de inicio</Form.Label>
+                          <Form.Label>{t("eventInfo.evStartDate")}</Form.Label>
                           <Form.Control
                             name="clasificationStartDate"
                             type="date"
@@ -488,7 +480,7 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
                           />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicDate">
-                          <Form.Label>Fecha de fin</Form.Label>
+                          <Form.Label>{t("eventInfo.evEndDate")}</Form.Label>
                           <Form.Control
                             name="clasificationEndDate"
                             type="date"
@@ -507,7 +499,7 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
                         controlId="formBasicRadio1"
                         required
                       >
-                        <Form.Label>Semi final:</Form.Label>
+                        <Form.Label>{t("eventInfo.evSemifinal")}</Form.Label>
 
                         <div className="d-flex gap-2">
                           <Form.Check
@@ -538,7 +530,7 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
                       </Form.Group>
                       <div className="d-flex gap-2">
                         <Form.Group className="mb-3" controlId="formBasicDate">
-                          <Form.Label>Fecha de inicio</Form.Label>
+                          <Form.Label>{t("eventInfo.evStartDate")}</Form.Label>
                           <Form.Control
                             name="semifinalStartDate"
                             type="date"
@@ -550,7 +542,7 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
                           />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicDate">
-                          <Form.Label>Fecha de fin</Form.Label>
+                          <Form.Label>{t("eventInfo.evEndDate")}</Form.Label>
                           <Form.Control
                             name="semifinalEndDate"
                             type="date"
@@ -569,7 +561,7 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
                         controlId="formBasicRadio2"
                         required
                       >
-                        <Form.Label>Final:</Form.Label>
+                        <Form.Label>{t("eventInfo.evFinal")}</Form.Label>
 
                         <div className="d-flex gap-2">
                           <Form.Check
@@ -598,7 +590,7 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
                       </Form.Group>
                       <div className="d-flex gap-2">
                         <Form.Group className="mb-3" controlId="formBasicDate">
-                          <Form.Label>Fecha de inicio</Form.Label>
+                          <Form.Label>{t("eventInfo.evStartDate")}</Form.Label>
                           <Form.Control
                             name="finalStartDate"
                             type="date"
@@ -610,7 +602,7 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
                           />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicDate">
-                          <Form.Label>Fecha de fin</Form.Label>
+                          <Form.Label>{t("eventInfo.evEndDate")}</Form.Label>
                           <Form.Control
                             name="finalEndDate"
                             type="date"
@@ -649,7 +641,7 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
               xl={{ span: "auto", offset: 9 }}
               xxl={{ span: "auto", offset: 9 }}
             >
-              <Button type="submit">Save changes</Button>
+              <Button type="submit">{t("eventInfo.evSaveChanges")}</Button>
             </Col>
             <Col
               xs={{ span: 1, offset: 0 }}
@@ -665,7 +657,7 @@ function ModifyEvent({ showMod, setShowMod, eventData, eventposition }) {
                   setShowMod([...showMod, showMod[eventposition]]);
                 }}
               >
-                Cancel
+                {t("eventInfo.evCancel")}
               </Button>
             </Col>
           </Card>

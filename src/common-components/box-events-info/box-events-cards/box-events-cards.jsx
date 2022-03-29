@@ -9,43 +9,59 @@ import taronja from "./../../../assets/images/taronja.png";
 import madridCship from "./../../../assets/images/events/madridCship.png";
 import ModifyEvent from "../modals/modal-modify-event/modal-modify-event";
 import { EventContext } from "../../../shared/event-info/event.context";
-import { getAllEventsByEmail } from "../../../APP/fetch/fetch-functions";
+import {
+  deletePastEvent,
+  getAllCurrentsEventsByEmail,
+  getAllPastsEventsByEmail,
+  modifyEvent,
+} from "../../../APP/fetch/fetch-functions";
 import { returnDateByTimeStamp } from "../../../APP/functions/functions";
+import { useTranslation } from "react-i18next";
+import DeleteEvent from "../modals/modal-delete-event/modal-delete-event";
 
 function BoxEventsCards({ showActive }) {
   const [theming] = useContext(ThemingContext);
   const [showModifyEvent, setShowModifyEvent] = useState([]);
   const [showPastEvents, setShowPastEvents] = useState([]);
+  const [t] = useTranslation("users");
 
   const [
-    currentEventsData,
-    setCurrentEventsData,
-    pastEventsData,
-    setPastEventsData,
+    currentBoxEventsData,
+    setCurrentBoxEventsData,
+    pastBoxEventsData,
+    setPastBoxEventsData,
+    ,
+    ,
   ] = useContext(EventContext);
 
-  const historicEvents = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   async function getCurrentBoxEvents() {
     const token = localStorage.getItem("token");
-    const events = await getAllEventsByEmail(token);
-    console.log(events);
+    const events = await getAllCurrentsEventsByEmail(token);
     const showEvents = Array(events.length).fill(false);
     setShowModifyEvent(showEvents);
-    console.log(showEvents);
-    setCurrentEventsData(events);
+    setCurrentBoxEventsData(events);
   }
   async function getPastBoxEvents() {
     const token = localStorage.getItem("token");
-    const events = await getAllEventsByEmail(token);
-    console.log(events);
+    const events = await getAllPastsEventsByEmail(token);
     const showEvents = Array(events.length).fill(false);
     setShowPastEvents(showEvents);
-    console.log(showEvents);
-    setPastEventsData(events);
+    setPastBoxEventsData(events);
   }
+
+  const modifyCurrentEvent = async (body, token, currentName) => {
+    await modifyEvent(body, token, currentName);
+    getCurrentBoxEvents();
+  };
+
+  const deleteEvent = async (body, token) => {
+    await deletePastEvent(body, token);
+    getPastBoxEvents();
+  };
   useEffect(() => {
     //traer los eventos de la base de datos y actualizar el currentEvents get a /boxes pasando email
     getCurrentBoxEvents();
+    getPastBoxEvents();
   }, []);
 
   return (
@@ -65,7 +81,7 @@ function BoxEventsCards({ showActive }) {
         xxl={{ span: 10, offset: 1 }}
       >
         {showActive
-          ? currentEventsData?.map((e, i) => {
+          ? currentBoxEventsData?.map((e, i) => {
               return (
                 <Col
                   key={i}
@@ -99,7 +115,7 @@ function BoxEventsCards({ showActive }) {
                       </Card.Title>
                       <div className="padding-bottom">
                         <Card.Text className="card-body_parr colorgey">
-                          Fecha:
+                          {t("eventsCards.evCardDate")}
                         </Card.Text>
                         <Card.Text className="card-body_parr ">
                           {returnDateByTimeStamp(e.eventStartDate)} -{" "}
@@ -108,7 +124,7 @@ function BoxEventsCards({ showActive }) {
                       </div>
                       <div className="padding-bottom">
                         <Card.Text className="card-body_parr colorgey">
-                          Cuidad:
+                          {t("eventsCards.evCardCity")}
                         </Card.Text>
                         <Card.Text className="card-body_parr ">
                           {e.eventCity}
@@ -116,7 +132,7 @@ function BoxEventsCards({ showActive }) {
                       </div>
                       <div className="padding-bottom">
                         <Card.Text className="card-body_parr colorgey">
-                          Descripción:
+                          {t("eventsCards.evCardDescription")}
                         </Card.Text>
                         <Card.Text className="card-body_parr ">
                           {e.shortDescription}
@@ -124,9 +140,9 @@ function BoxEventsCards({ showActive }) {
                       </div>
                       <div className="padding-bottom">
                         <Card.Text className="card-body_parr colorgey">
-                          Atletas:
+                          {t("eventsCards.evCardsAtletas")}
                         </Card.Text>
-                        <Card.Text className="card-body_parr ">{`${e.eventJoinPerson}/${e.eventLimitPerson}`}</Card.Text>
+                        <Card.Text className="card-body_parr ">{`${e.eventJoinPerson?.length}/${e.eventLimitPerson}`}</Card.Text>
                       </div>
                       <Button
                         className="event_button"
@@ -139,7 +155,7 @@ function BoxEventsCards({ showActive }) {
                           ]);
                         }}
                       >
-                        Datalles / Modificar
+                        {t("eventsCards.evCardModify")}
                       </Button>
                     </Card.Body>
                   </Card>
@@ -149,11 +165,12 @@ function BoxEventsCards({ showActive }) {
                     setShowMod={setShowModifyEvent}
                     eventData={e}
                     eventposition={i}
+                    modifyCurrentEvent={modifyCurrentEvent}
                   ></ModifyEvent>
                 </Col>
               );
             })
-          : historicEvents.map((e, i) => {
+          : pastBoxEventsData.map((e, i) => {
               return (
                 <Col key={i} xs={10} sm={6} md={5} lg={4} xl={3} xxl={3}>
                   <Card className="events-card__container">
@@ -167,47 +184,62 @@ function BoxEventsCards({ showActive }) {
                     />
                     <Card.Body className="events-body__container">
                       <Card.Title className="card-body_tittle">
-                        Nombre del evento
+                        {e.eventName}
                       </Card.Title>
                       <div className="padding-bottom">
                         <Card.Text className="card-body_parr colorgey">
-                          Fecha:
+                          {t("eventsCards.evCardDate")}
                         </Card.Text>
                         <Card.Text className="card-body_parr ">
-                          15.05.2022 - 17.05.2022
+                          {returnDateByTimeStamp(e.eventStartDate)} -{" "}
+                          {returnDateByTimeStamp(e.eventEndDate)}
                         </Card.Text>
                       </div>
                       <div className="padding-bottom">
                         <Card.Text className="card-body_parr colorgey">
-                          Cuidad:
+                          {t("eventsCards.evCardCity")}
                         </Card.Text>
                         <Card.Text className="card-body_parr ">
-                          Valencia
+                          {e.eventCity}
                         </Card.Text>
                       </div>
                       <div className="padding-bottom">
                         <Card.Text className="card-body_parr colorgey">
-                          Descripción:
+                          {t("eventsCards.evCardDescription")}
                         </Card.Text>
                         <Card.Text className="card-body_parr ">
-                          Some quick example text to build on the card title and
-                          make up the bulk of the card's content.
+                          {e.shortDescription}
                         </Card.Text>
                       </div>
                       <div className="padding-bottom">
                         <Card.Text className="card-body_parr colorgey">
-                          Atletas:
+                          {t("eventsCards.evCardsAtletas")}
                         </Card.Text>
-                        <Card.Text className="card-body_parr ">10/25</Card.Text>
+                        <Card.Text className="card-body_parr ">{`${e.eventJoinPerson.length}/${e.eventLimitPerson}`}</Card.Text>
                       </div>
                       <Button
                         className="event_button"
                         variant={theming.primary.color}
+                        onClick={() => {
+                          showPastEvents[i] = true;
+                          setShowPastEvents([
+                            ...showPastEvents,
+                            showPastEvents[i],
+                          ]);
+                        }}
                       >
-                        Ver / Borrar
+                        {t("eventsCards.evCardDelete")}
                       </Button>
                     </Card.Body>
                   </Card>
+                  <DeleteEvent
+                    key={i}
+                    showMod={showPastEvents}
+                    setShowMod={setShowPastEvents}
+                    eventData={e}
+                    eventposition={i}
+                    deleteEvent={deleteEvent}
+                  ></DeleteEvent>
                 </Col>
               );
             })}

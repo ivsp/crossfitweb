@@ -58,7 +58,13 @@ function NavUserButton(props) {
         >
           {userData.type === "user" ? (
             <>
-              <Nav.Link className="nav_link p-3">
+              <Nav.Link
+                className="nav_link p-3"
+                onClick={() => {
+                  navigate("/events");
+                  setShow(false);
+                }}
+              >
                 {t("menu_lateral.user_eventos")}
               </Nav.Link>
               <Nav.Link

@@ -1,21 +1,19 @@
 import "./box-events-info.scss";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { ThemingContext } from "../../shared/theming/theming.context";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import BoxEventsCards from "./box-events-cards/box-events-cards";
 import AddEvent from "./modals/modal-add-event/modal-add-event";
+import { useTranslation } from "react-i18next";
 
 function BoxEventsInfo() {
   const [theming] = useContext(ThemingContext);
   const [showActiveEvents, setShowActEvents] = useState(true);
   const [showAddEvent, setShowAddEvent] = useState(false);
-
-  useEffect(() => {
-    //hago un get para obtener los eventos de la base de datos. Todos los eventos
-  }, []);
+  const [t] = useTranslation("users");
 
   const showActEvents = () => {
     setShowActEvents(true);
@@ -53,12 +51,12 @@ function BoxEventsInfo() {
               <div className="links__container">
                 <Nav.Item>
                   <Nav.Link onClick={showActEvents} eventKey="link-1">
-                    Eventos activos
+                    {t("userInfo.evActivos")}
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                   <Nav.Link onClick={showHistoricEvents} eventKey="link-2">
-                    Histórico de eventos
+                    {t("userInfo.evPasados")}
                   </Nav.Link>
                 </Nav.Item>
               </div>
@@ -77,7 +75,7 @@ function BoxEventsInfo() {
                   variant={theming.primary.color}
                   onClick={() => setShowAddEvent(true)}
                 >
-                  Añadir evento
+                  {t("userInfo.añadirEvento")}
                 </Button>
               </Nav.Item>
             </Col>

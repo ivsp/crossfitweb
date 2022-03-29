@@ -3,14 +3,30 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import imageTaronja from "../../assets/images/taronja.png";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ThemingContext } from "../../shared/theming/theming.context";
 import { useTranslation } from "react-i18next";
+import { EventContext } from "../../shared/event-info/event.context";
+import { returnDateByTimeStamp } from "../../APP/functions/functions";
+import { useNavigate } from "react-router-dom";
+import { getAllCurrentsEvents } from "../../APP/fetch/fetch-functions";
 
-function BodyUser() {
-  const events = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+function BodyEvents() {
   const [theming] = useContext(ThemingContext);
   const [t] = useTranslation("users");
+  const [, , , , currentEventsData, setCurrentsEventsData] =
+    useContext(EventContext);
+  const navigate = useNavigate();
+
+  async function getAllEvents() {
+    const events = await getAllCurrentsEvents();
+    setCurrentsEventsData(events);
+  }
+
+  useEffect(() => {
+    //traer los eventos de la base de datos y actualizar el currentEvents
+    getAllEvents();
+  }, []);
 
   return (
     <Card>
@@ -33,7 +49,7 @@ function BodyUser() {
           xl={6}
           xxl={6}
         >
-          {events.map((e, i) => {
+          {currentEventsData?.map((e, i) => {
             return (
               <Row
                 className="p-md-3 d-flex justify-content-center"
@@ -84,7 +100,7 @@ function BodyUser() {
                           fontFamily: "rubik-semibold",
                         }}
                       >
-                        Taronja Games
+                        {e.eventName}
                       </Card.Title>
                       <Card.Title
                         style={{
@@ -92,7 +108,8 @@ function BodyUser() {
                           fontSize: "1rem",
                         }}
                       >
-                        19.06.2022
+                        {returnDateByTimeStamp(e.eventStartDate)} /{" "}
+                        {returnDateByTimeStamp(e.eventEndDate)}
                       </Card.Title>
                       <Card.Text
                         style={{
@@ -100,10 +117,7 @@ function BodyUser() {
                           fontSize: "0.9rem",
                         }}
                       >
-                        Vuelve el Taronja Games 2022, la VII edición de un
-                        evento bajo licencia CrossFit con el que podrás volver a
-                        romper tus límites y encontrar tu mejor versión. ¿te lo
-                        vas a perder?
+                        {e.shortDescription}
                       </Card.Text>
                       <div className="d-flex gap-3">
                         <Card.Text
@@ -120,7 +134,7 @@ function BodyUser() {
                             fontSize: "0.9rem",
                           }}
                         >
-                          Valencia
+                          {e.eventCity}
                         </Card.Text>
                       </div>
                       <div className="d-flex gap-3">
@@ -139,7 +153,10 @@ function BodyUser() {
                             paddingBottom: "0.3rem",
                           }}
                         >
-                          ÉLITE, RX, SC, TEAM, TEAM SC
+                          {e.eliteCategory ? "ELITE," : ""}
+                          {e.rxCategory ? " RX," : ""}
+                          {e.scCategory ? " SC," : ""}
+                          {e.teamCategory ? " TEAM" : ""}
                         </Card.Text>
                       </div>
                       <Button
@@ -148,7 +165,9 @@ function BodyUser() {
                           fontSize: "1rem",
                         }}
                         variant={`${theming.primary.color}`}
+                        onClick={() => navigate(`/events/${e.eventName}`)}
                       >
+                        {" "}
                         {t("eventos.mas_info")}
                       </Button>
                     </Card.Body>
@@ -178,4 +197,4 @@ function BodyUser() {
   );
 }
 
-export default BodyUser;
+export default BodyEvents;

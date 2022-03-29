@@ -5,9 +5,9 @@ import { useTranslation } from "react-i18next";
 import { useContext } from "react";
 import { UserContext } from "../../../shared/user-info/user.context";
 
-function ChangeBoxInfo(props, { userdata, setUserdata }) {
+function ChangeBoxInfo(props) {
   const [t] = useTranslation("users");
-  const [userData, setUserData] = useContext(UserContext)
+  const [userData, setUserData] = useContext(UserContext);
   const modifyUserData = () => {
     //aqui haré el fetch a la base de datos una vez tenga implementado el multer
   };
@@ -43,7 +43,9 @@ function ChangeBoxInfo(props, { userdata, setUserdata }) {
               name="name"
               type="text"
               placeholder={`${t("actualizar_datos.nombreBox")}`}
-              value={userdata?.name ? `${userdata.name}` : ""}
+              defaultValue={
+                props.userdata?.name ? `${props.userdata.name}` : ""
+              }
               required
             />
           </Form.Group>
@@ -54,7 +56,9 @@ function ChangeBoxInfo(props, { userdata, setUserdata }) {
               name="addres"
               type="text"
               placeholder={`${t("actualizar_datos.direccion")}`}
-              value={userdata?.addres ? `${userdata.addres}` : ""}
+              defaultValue={
+                props.userdata?.addres ? `${props.userdata.addres}` : ""
+              }
               required
             />
           </Form.Group>
@@ -63,7 +67,9 @@ function ChangeBoxInfo(props, { userdata, setUserdata }) {
             <Form.Control
               name="email"
               type="email"
-              value={userdata?.email ? `${userdata.email}` : ""}
+              defaultValue={
+                props.userdata?.email ? `${props.userdata.email}` : ""
+              }
               disabled
             />
           </Form.Group>
@@ -74,7 +80,9 @@ function ChangeBoxInfo(props, { userdata, setUserdata }) {
               name="city"
               type="text"
               placeholder={`${t("actualizar_datos.ciudad")}`}
-              value={userdata?.city ? `${userdata.city}` : ""}
+              defaultValue={
+                props.userdata?.city ? `${props.userdata.city}` : ""
+              }
               required
             />
           </Form.Group>
@@ -84,7 +92,9 @@ function ChangeBoxInfo(props, { userdata, setUserdata }) {
               name="province"
               type="text"
               placeholder={`${t("actualizar_datos.provincia")}`}
-              value={userdata?.province ? `${userdata.province}` : ""}
+              defaultValue={
+                props.userdata?.province ? `${props.userdata.province}` : ""
+              }
               required
             />
           </Form.Group>
@@ -94,7 +104,11 @@ function ChangeBoxInfo(props, { userdata, setUserdata }) {
               name="postalCode"
               type="text"
               placeholder={`${t("actualizar_datos.cp")}`}
-              value={userdata?.postal_code ? `${userdata.postal_code}` : ""}
+              defaultValue={
+                props.userdata?.postal_code
+                  ? `${props.userdata.postal_code}`
+                  : ""
+              }
               required
             />
           </Form.Group>

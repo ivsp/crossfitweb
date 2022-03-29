@@ -66,7 +66,7 @@ function FindEvent() {
           xxl={{ span: 2, offset: 0 }}
         >
           <Button
-            onClick={() => navigate("/users")}
+            onClick={() => navigate("/events")}
             className="event_button"
             variant={theming.soft_details.color}
           >

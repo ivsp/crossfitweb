@@ -8,11 +8,13 @@ import { useContext, useState } from "react";
 import { ThemingContext } from "../../shared/theming/theming.context";
 import ChangeBoxInfo from "./modals/change-box-info";
 import { UserContext } from "../../shared/user-info/user.context";
+import { useTranslation } from "react-i18next";
 
 function BoxInfo() {
   const [theming] = useContext(ThemingContext);
   const [modalModifyDataShow, setModalModifyDataShow] = useState(false);
   const [userData, setUserData] = useContext(UserContext);
+  const [t] = useTranslation("users");
 
   return (
     <Row style={{ margin: "0px", height: "fit-content", paddingTop: "1.5rem" }}>
@@ -30,21 +32,30 @@ function BoxInfo() {
           </div>
           <Card.Body>
             <Card.Title className="box-name">{userData.name}</Card.Title>
-            <Card.Text className="tittle-description">Dirección:</Card.Text>
+            <Card.Text className="tittle-description">
+              {" "}
+              {t("userInfo.direccion")}
+            </Card.Text>
             <Card.Text className="tittle-value">{userData.addres}</Card.Text>
             <div className="location-data_container">
               <div>
-                <Card.Text className="tittle-description">Cuidad:</Card.Text>
+                <Card.Text className="tittle-description">
+                  {t("userInfo.ciudad")}
+                </Card.Text>
                 <Card.Text className="tittle-value">{userData.city}</Card.Text>
               </div>
               <div>
-                <Card.Text className="tittle-description">Provincia:</Card.Text>
+                <Card.Text className="tittle-description">
+                  {t("userInfo.provincia")}
+                </Card.Text>
                 <Card.Text className="tittle-value">
                   {userData.province}
                 </Card.Text>
               </div>
               <div>
-                <Card.Text className="tittle-description">CP:</Card.Text>
+                <Card.Text className="tittle-description">
+                  {t("userInfo.cp")}
+                </Card.Text>
                 <Card.Text className="tittle-value">
                   {userData.postal_code}
                 </Card.Text>
@@ -53,7 +64,9 @@ function BoxInfo() {
 
             <div className="flex-container">
               <div>
-                <Card.Text className="tittle-description">Teléfono</Card.Text>
+                <Card.Text className="tittle-description">
+                  {t("userInfo.telefono")}
+                </Card.Text>
                 <Card.Text className="tittle-value">{userData.phone}</Card.Text>
               </div>
               <Button
@@ -63,7 +76,7 @@ function BoxInfo() {
                 variant={theming.primary.color}
                 onClick={() => setModalModifyDataShow(true)}
               >
-                Modificar datos
+                {t("userInfo.modDatos")}
               </Button>
             </div>
           </Card.Body>

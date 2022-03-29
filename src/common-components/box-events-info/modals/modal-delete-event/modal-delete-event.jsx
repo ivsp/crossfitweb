@@ -1,4 +1,4 @@
-import "./modal-add-event.scss";
+import "./../modal-add-event/modal-add-event.scss";
 import Modal from "react-bootstrap/Modal";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -8,147 +8,37 @@ import Form from "react-bootstrap/Form";
 import { useContext } from "react";
 import { ThemingContext } from "../../../../shared/theming/theming.context";
 import giraldaCr from "./../../../../assets/images/boxes/giralda.png";
-import { EventContext } from "../../../../shared/event-info/event.context";
-import { createNewEvent } from "../../../../APP/fetch/fetch-functions";
-import { getCurrentDate } from "../../../../APP/functions/functions";
+import { returnDateByTimeStamp } from "../../../../APP/functions/functions";
 import { useTranslation } from "react-i18next";
-function AddEvent({ show, setShow }) {
+
+function DeleteEvent({
+  showMod,
+  setShowMod,
+  eventData,
+  eventposition,
+  deleteEvent,
+}) {
   const [theming] = useContext(ThemingContext);
-  const [currentBoxEventsData, setCurrentBoxEventsData, , , , ,] =
-    useContext(EventContext);
   const [t] = useTranslation("users");
 
-  async function addEvents(body, token) {
-    const events = await createNewEvent(body, token);
-    setCurrentBoxEventsData([...currentBoxEventsData, events]);
-  }
-  const addEvent = (e) => {
+  const delEvent = (e) => {
     e.preventDefault();
-
-    if (
-      new Date(e.target.eventStartDate.value).getTime() >=
-      new Date(e.target.eventEndDate.value).getTime()
-    ) {
-      alert(
-        "la fecha de inicio del evento debe ser inferior a la de finalizacion "
-      );
-    } else if (
-      new Date(e.target.clasificationStartDate.value).getTime() >=
-      new Date(e.target.eventEndDate.value).getTime()
-    ) {
-      alert(
-        "la fecha de inicio del clasificatorio debe ser inferior a la de finalizacion del evento"
-      );
-    } else if (
-      new Date(e.target.clasificationEndDate.value).getTime() <=
-      new Date(e.target.clasificationStartDate.value).getTime()
-    ) {
-      alert(
-        "la fecha de fin del clafificatorio debe ser superior a la de inicio"
-      );
-    } else if (
-      new Date(e.target.clasificationEndDate.value).getTime() >=
-      new Date(e.target.eventEndDate.value).getTime()
-    ) {
-      alert(
-        "la fecha de inicio del clafificatorio no puede ser superior a la de finalización del evento"
-      );
-    } else if (
-      new Date(e.target.semifinalStartDate.value).getTime() <=
-      new Date(e.target.clasificationEndDate.value).getTime()
-    ) {
-      alert(
-        "la fecha de inicio de la semifinal debe ser superior a la de finalización del clasificatorio"
-      );
-    } else if (
-      new Date(e.target.semifinalStartDate.value).getTime() >
-      new Date(e.target.eventEndDate.value).getTime()
-    ) {
-      alert(
-        "la fecha de inicio de la semifinal no puede ser superior a la de finalización del evento"
-      );
-    } else if (
-      new Date(e.target.semifinalEndDate.value).getTime() <=
-      new Date(e.target.semifinalStartDate.value).getTime()
-    ) {
-      alert("la fecha de fin de la semifinal debe ser superior a la de inicio");
-    } else if (
-      new Date(e.target.semifinalEndDate.value).getTime() >
-      new Date(e.target.eventEndDate.value).getTime()
-    ) {
-      alert(
-        "la fecha de fin de la semifinal debe no puede ser superior a la de finalizacion del evento"
-      );
-    } else if (
-      new Date(e.target.finalStartDate.value).getTime() <=
-      new Date(e.target.semifinalEndDate.value).getTime()
-    ) {
-      alert(
-        "la fecha de inicio de la final debe ser superior a la de fin de la semifinal"
-      );
-    } else if (
-      new Date(e.target.finalStartDate.value).getTime() >=
-      new Date(e.target.eventEndDate.value).getTime()
-    ) {
-      alert(
-        "la fecha de inicio de la final no puede ser superior a la de fin del evento"
-      );
-    } else if (
-      new Date(e.target.finalEndDate.value).getTime() <=
-      new Date(e.target.finalStartDate.value).getTime()
-    ) {
-      alert("la fecha de fin de la final debe ser superior a la de inicio");
-    } else if (
-      new Date(e.target.finalEndDate.value).getTime() >
-      new Date(e.target.eventEndDate.value).getTime()
-    ) {
-      alert(
-        "la fecha de fin de la final no puede ser superior a la de finalización del evento"
-      );
-    } else {
-      const token = localStorage.getItem("token");
-      const body = {
-        eventName: e.target.eventName.value,
-        eventCity: e.target.eventCity.value,
-        eventAddres: e.target.eventAddres.value,
-        eventStartDate: new Date(e.target.eventStartDate.value).getTime(),
-        eventEndDate: new Date(e.target.eventEndDate.value).getTime(),
-        eventLimitPerson: e.target.eventLimitPerson.value,
-        eventJoinPerson: [],
-        eliteCategory: e.target.elite_category.checked,
-        rxCategory: e.target.rx_category.checked,
-        scCategory: e.target.sc_category.checked,
-        teamCategory: e.target.team_category.checked,
-        shortDescription: e.target.shortDescription.value,
-        longDescription: e.target.longDescription.value,
-        clasificationType: e.target.clasificationType.value,
-        clasificationStartDate: new Date(
-          e.target.clasificationStartDate.value
-        ).getTime(),
-        clasificationEndDate: new Date(
-          e.target.clasificationEndDate.value
-        ).getTime(),
-        semifinalType: e.target.semifinalType.value,
-        semifinalStartDate: new Date(
-          e.target.semifinalStartDate.value
-        ).getTime(),
-        semifinalEndDate: new Date(e.target.semifinalEndDate.value).getTime(),
-        finalType: e.target.finalType.value,
-        finalStartDate: new Date(e.target.finalStartDate.value).getTime(),
-        finalEndDate: new Date(e.target.finalEndDate.value).getTime(),
-      };
-
-      addEvents(body, token);
-      setShow(false);
-    }
+    const token = localStorage.getItem("token");
+    deleteEvent(eventData, token);
+    showMod[eventposition] = false;
+    setShowMod([...showMod, showMod[eventposition]]);
   };
+
   return (
     <Modal
-      show={show}
+      show={showMod[eventposition]}
       fullscreen={true}
       backdrop="static"
       keyboard={false}
-      onHide={() => setShow(false)}
+      onHide={() => {
+        showMod[eventposition] = false;
+        setShowMod([...showMod, showMod[eventposition]]);
+      }}
       style={{
         minHeight: "100vh",
       }}
@@ -160,11 +50,10 @@ function AddEvent({ show, setShow }) {
             padding: "1rem",
           }}
         >
-          {t("eventInfo.evAddTittle")}
+          {t("eventInfo.evModTittle")}
         </Modal.Title>
-        {/* <Modal.Body>Modal body content</Modal.Body> */}
       </Modal.Header>
-      <Form onSubmit={addEvent}>
+      <Form onSubmit={delEvent}>
         <Row
           style={{
             margin: "0px",
@@ -230,12 +119,12 @@ function AddEvent({ show, setShow }) {
                     xxl={{ span: 4, offset: 0 }}
                   >
                     <Form.Group className="mb-3" controlId="formBasicName">
-                      <Form.Label> {t("eventInfo.evName")} </Form.Label>
+                      <Form.Label>{t("eventInfo.evName")}</Form.Label>
                       <Form.Control
                         name="eventName"
                         type="name"
-                        placeholder={`${t("eventInfo.evNameHolder")}`}
-                        required
+                        defaultValue={`${eventData.eventName}`}
+                        disabled
                       />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicCity">
@@ -243,17 +132,17 @@ function AddEvent({ show, setShow }) {
                       <Form.Control
                         name="eventCity"
                         type="city"
-                        placeholder={`${t("eventInfo.evCityHolder")}`}
-                        required
+                        defaultValue={`${eventData.eventCity}`}
+                        disabled
                       />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicDirection">
                       <Form.Label>{t("eventInfo.evDirection")}</Form.Label>
                       <Form.Control
                         name="eventAddres"
-                        type="addres"
-                        placeholder={`${t("eventInfo.evDirectinHolder")}`}
-                        required
+                        type="direction"
+                        defaultValue={`${eventData.eventAddres}`}
+                        disabled
                       />
                     </Form.Group>
                   </Col>
@@ -271,8 +160,10 @@ function AddEvent({ show, setShow }) {
                       <Form.Control
                         name="eventStartDate"
                         type="date"
-                        required
-                        min={getCurrentDate()}
+                        defaultValue={returnDateByTimeStamp(
+                          eventData.eventStartDate
+                        )}
+                        disabled
                       />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicDate">
@@ -280,8 +171,10 @@ function AddEvent({ show, setShow }) {
                       <Form.Control
                         name="eventEndDate"
                         type="date"
-                        required
-                        min={getCurrentDate()}
+                        defaultValue={returnDateByTimeStamp(
+                          eventData.eventEndDate
+                        )}
+                        disabled
                       />
                     </Form.Group>
                   </Col>
@@ -298,15 +191,24 @@ function AddEvent({ show, setShow }) {
                       <Form.Control
                         name="eventLimitPerson"
                         type="number"
-                        placeholder={`${t("eventInfo.evLimAsistantHolder")}`}
+                        defaultValue={`${eventData.eventLimitPerson}`}
                         min="10"
-                        required
+                        disabled
+                      />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicNumber">
+                      <Form.Label>{t("eventInfo.evAsistants")}</Form.Label>
+                      <Form.Control
+                        name="join_atlhete"
+                        type="number"
+                        defaultValue={`${eventData.eventJoinPerson}`}
+                        disabled
                       />
                     </Form.Group>
                     <Form.Group
                       className="mb-3 "
                       controlId="formBasicCheckbox"
-                      required
+                      disabled
                     >
                       <Form.Label>{t("eventInfo.evCategory")}</Form.Label>
 
@@ -314,22 +216,32 @@ function AddEvent({ show, setShow }) {
                         <Form.Check
                           name="elite_category"
                           type="checkbox"
+                          defaultChecked={
+                            eventData.eliteCategory ? true : false
+                          }
                           label="Elite"
+                          disabled
                         />
                         <Form.Check
                           name="rx_category"
                           type="checkbox"
+                          defaultChecked={eventData.rxCategory ? true : false}
                           label="RX"
+                          disabled
                         />
                         <Form.Check
                           name="sc_category"
                           type="checkbox"
+                          defaultChecked={eventData.scCategory ? true : false}
                           label="SC"
+                          disabled
                         />
                         <Form.Check
                           name="team_category"
                           type="checkbox"
+                          defaultChecked={eventData.teamCategory ? true : false}
                           label="Team"
+                          disabled
                         />
                       </div>
                     </Form.Group>
@@ -375,10 +287,10 @@ function AddEvent({ show, setShow }) {
                     <Form.Control
                       as="textarea"
                       name="shortDescription"
-                      placeholder={`${t("eventInfo.evShortDescriptHolder")}`}
                       maxLength="95"
+                      defaultValue={`${eventData.shortDescription}`}
                       style={{ height: "90px" }}
-                      required
+                      disabled
                     />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicText">
@@ -386,9 +298,9 @@ function AddEvent({ show, setShow }) {
                     <Form.Control
                       as="textarea"
                       name="longDescription"
-                      placeholder={`${t("eventInfo.evLongDescriptHolder")}`}
+                      defaultValue={`${eventData.longDescription}`}
                       style={{ height: "300px" }}
-                      required
+                      disabled
                     />
                   </Form.Group>
                 </Col>
@@ -405,7 +317,7 @@ function AddEvent({ show, setShow }) {
                       <Form.Group
                         className="mb-3 "
                         controlId="formBasicRadio"
-                        required
+                        disabled
                       >
                         <Form.Label>
                           {t("eventInfo.evClasification")}
@@ -416,15 +328,25 @@ function AddEvent({ show, setShow }) {
                             name="clasificationType"
                             type="radio"
                             value="presencial"
-                            label={`${t("eventInfo.clasificationPresencial")}`}
-                            required
+                            label="Presencial"
+                            defaultChecked={
+                              eventData.clasificationType === "presencial"
+                                ? true
+                                : false
+                            }
+                            disabled
                           />
                           <Form.Check
                             name="clasificationType"
                             type="radio"
                             value="online"
-                            label={`${t("eventInfo.clasificationOnline")}`}
-                            required
+                            label="online"
+                            defaultChecked={
+                              eventData.clasificationType === "online"
+                                ? true
+                                : false
+                            }
+                            disabled
                           />
                         </div>
                       </Form.Group>
@@ -434,8 +356,10 @@ function AddEvent({ show, setShow }) {
                           <Form.Control
                             name="clasificationStartDate"
                             type="date"
-                            required
-                            min={getCurrentDate()}
+                            defaultValue={returnDateByTimeStamp(
+                              eventData.clasificationStartDate
+                            )}
+                            disabled
                           />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicDate">
@@ -443,8 +367,10 @@ function AddEvent({ show, setShow }) {
                           <Form.Control
                             name="clasificationEndDate"
                             type="date"
-                            required
-                            min={getCurrentDate()}
+                            defaultValue={returnDateByTimeStamp(
+                              eventData.clasificationEndDate
+                            )}
+                            disabled
                           />
                         </Form.Group>
                       </div>
@@ -453,7 +379,7 @@ function AddEvent({ show, setShow }) {
                       <Form.Group
                         className="mb-3 "
                         controlId="formBasicRadio1"
-                        required
+                        disabled
                       >
                         <Form.Label>{t("eventInfo.evSemifinal")}</Form.Label>
 
@@ -462,15 +388,25 @@ function AddEvent({ show, setShow }) {
                             name="semifinalType"
                             type="radio"
                             value="presencial"
-                            label={`${t("eventInfo.clasificationPresencial")}`}
-                            required
+                            label="Presencial"
+                            defaultChecked={
+                              eventData.semifinalType === "presencial"
+                                ? true
+                                : false
+                            }
+                            disabled
                           />
                           <Form.Check
                             name="semifinalType"
                             type="radio"
                             value="online"
-                            label={`${t("eventInfo.clasificationOnline")}`}
-                            required
+                            label="online"
+                            defaultChecked={
+                              eventData.semifinalType === "online"
+                                ? true
+                                : false
+                            }
+                            disabled
                           />
                         </div>
                       </Form.Group>
@@ -480,8 +416,10 @@ function AddEvent({ show, setShow }) {
                           <Form.Control
                             name="semifinalStartDate"
                             type="date"
-                            min={getCurrentDate()}
-                            required
+                            defaultValue={returnDateByTimeStamp(
+                              eventData.semifinalStartDate
+                            )}
+                            disabled
                           />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicDate">
@@ -489,8 +427,10 @@ function AddEvent({ show, setShow }) {
                           <Form.Control
                             name="semifinalEndDate"
                             type="date"
-                            min={getCurrentDate()}
-                            required
+                            defaultValue={returnDateByTimeStamp(
+                              eventData.semifinalEndDate
+                            )}
+                            disabled
                           />
                         </Form.Group>
                       </div>
@@ -499,7 +439,7 @@ function AddEvent({ show, setShow }) {
                       <Form.Group
                         className="mb-3 "
                         controlId="formBasicRadio2"
-                        required
+                        disabled
                       >
                         <Form.Label>{t("eventInfo.evFinal")}</Form.Label>
 
@@ -508,15 +448,23 @@ function AddEvent({ show, setShow }) {
                             name="finalType"
                             type="radio"
                             value="presencial"
-                            label={`${t("eventInfo.clasificationPresencial")}`}
-                            required
+                            label="Presencial"
+                            defaultChecked={
+                              eventData.finalType === "presencial"
+                                ? true
+                                : false
+                            }
+                            disabled
                           />
                           <Form.Check
                             name="finalType"
                             type="radio"
                             value="online"
-                            label={`${t("eventInfo.clasificationOnline")}`}
-                            required
+                            label="online"
+                            defaultChecked={
+                              eventData.finalType === "online" ? true : false
+                            }
+                            disabled
                           />
                         </div>
                       </Form.Group>
@@ -526,8 +474,10 @@ function AddEvent({ show, setShow }) {
                           <Form.Control
                             name="finalStartDate"
                             type="date"
-                            min={getCurrentDate()}
-                            required
+                            defaultValue={returnDateByTimeStamp(
+                              eventData.finalStartDate
+                            )}
+                            disabled
                           />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicDate">
@@ -535,8 +485,10 @@ function AddEvent({ show, setShow }) {
                           <Form.Control
                             name="finalEndDate"
                             type="date"
-                            min={getCurrentDate()}
-                            required
+                            defaultValue={returnDateByTimeStamp(
+                              eventData.finalEndDate
+                            )}
+                            disabled
                           />
                         </Form.Group>
                       </div>
@@ -550,7 +502,6 @@ function AddEvent({ show, setShow }) {
         <Row
           style={{
             margin: "0px",
-            paddingBottom: "3.5rem",
           }}
         >
           <Card
@@ -568,7 +519,7 @@ function AddEvent({ show, setShow }) {
               xl={{ span: "auto", offset: 9 }}
               xxl={{ span: "auto", offset: 9 }}
             >
-              <Button type="submit">{t("eventInfo.evAdd")}</Button>
+              <Button type="submit">{t("eventInfo.evDelete")}</Button>
             </Col>
             <Col
               xs={{ span: 1, offset: 0 }}
@@ -578,7 +529,12 @@ function AddEvent({ show, setShow }) {
               xl={{ span: 1, offset: 0 }}
               xxl={{ span: 1, offset: 0 }}
             >
-              <Button onClick={() => setShow(false)}>
+              <Button
+                onClick={() => {
+                  showMod[eventposition] = false;
+                  setShowMod([...showMod, showMod[eventposition]]);
+                }}
+              >
                 {t("eventInfo.evCancel")}
               </Button>
             </Col>
@@ -589,4 +545,4 @@ function AddEvent({ show, setShow }) {
   );
 }
 
-export default AddEvent;
+export default DeleteEvent;

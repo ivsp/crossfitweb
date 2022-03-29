@@ -7,14 +7,11 @@ export async function registerNewUser(body) {
     },
   });
 
-  console.log(r);
-
   return r;
 }
 
 export async function validateNewUser(token) {
-  const r = await fetch(`http://localhost:4000/auth/validate?token=${token}`);
-  console.log(r);
+  await fetch(`http://localhost:4000/auth/validate?token=${token}`);
 }
 
 export async function logInUser(body) {
@@ -27,11 +24,9 @@ export async function logInUser(body) {
     },
   });
   if (r.status !== 201) {
-    console.log(r);
     return r;
   } else {
     const data = await r.json();
-    console.log(data);
     return data;
   }
 }
@@ -66,7 +61,6 @@ export async function getUserData(token) {
     return r;
   } else {
     const data = await r.json();
-
     return data;
   }
 }
@@ -81,7 +75,6 @@ export async function modifyUserData(body, token) {
     },
   });
   if (r.status === 404) {
-    console.log(r);
     return r;
   } else {
     const data = await r.json();
@@ -99,7 +92,6 @@ export async function createEvent(body, token) {
     },
   });
   if (r.status === 401 || r.status === 409) {
-    console.log(r);
     return r;
   } else {
     const data = await r.json();
@@ -138,13 +130,12 @@ export async function modifyEvent(body, token, currentName) {
     return r;
   } else {
     const data = await r.json();
-    console.log(data);
     return data;
   }
 }
 
-export async function getAllEventsByEmail(token) {
-  const r = await fetch(`http://localhost:4000/boxes`, {
+export async function getAllCurrentsEventsByEmail(token) {
+  const r = await fetch(`http://localhost:4000/events/box/current`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -155,6 +146,72 @@ export async function getAllEventsByEmail(token) {
     return r;
   } else {
     const data = await r.json();
+    return data;
+  }
+}
+
+export async function getAllPastsEventsByEmail(token) {
+  const r = await fetch(`http://localhost:4000/events/box/past`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (r.status === 401 || r.status === 403 || r.status === 404) {
+    return r;
+  } else {
+    const data = await r.json();
+    return data;
+  }
+}
+
+export async function deletePastEvent(body, token) {
+  const r = await fetch(`http://localhost:4000/events/box/past`, {
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (r.status === 401 || r.status === 404) {
+    return r;
+  } else {
+    const data = await r.json();
+    return data;
+  }
+}
+
+export async function getAllCurrentsEvents() {
+  const r = await fetch(`http://localhost:4000/events`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (r.status === 404) {
+    return r;
+  } else {
+    const data = await r.json();
+    return data;
+  }
+}
+
+export async function addUserToaEvent(body, token) {
+  const r = await fetch(`http://localhost:4000/events/user`, {
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (r.status === 401 || r.status === 404) {
+    return r;
+  } else {
+    const data = await r.json();
+
     return data;
   }
 }
