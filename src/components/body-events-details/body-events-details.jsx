@@ -10,6 +10,7 @@ import { EventContext } from "../../shared/event-info/event.context";
 import { returnDateByTimeStamp } from "../../APP/functions/functions";
 import { useParams } from "react-router-dom";
 import {
+  addAthlete,
   addUserToaEvent,
   getAllCurrentsEvents,
 } from "../../APP/fetch/fetch-functions";
@@ -34,13 +35,21 @@ function BodyEventsDetails() {
   }
 
   const addUser = async () => {
-    const body = {
-      evName: eventDetails.eventName,
+    const bodyForEvent = {
+      eventName: eventDetails.eventName,
+    };
+    const bodyForAthlete = {
+      eventName: eventDetails.eventName,
+      eventStartDate: eventDetails.eventStartDate,
+      eventEndDate: eventDetails.eventEndDate,
+      eventCity: eventDetails.eventCity,
     };
     const token = localStorage.getItem("token");
     if (token && token !== undefined) {
-      const data = await addUserToaEvent(body, token);
-      if (data.error) {
+      const data = await addUserToaEvent(bodyForEvent, token);
+
+      const athlete = await addAthlete(bodyForAthlete, token);
+      if (data.error || athlete.error) {
         setAlertErrShow(true);
       } else {
         setAlertSuccShow(true);

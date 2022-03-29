@@ -69,7 +69,11 @@ function NavUserButton(props) {
               </Nav.Link>
               <Nav.Link
                 className="nav_link p-3"
-                onClick={() => setModalMenuShow(true)}
+                onClick={() => {
+                  navigate("/users");
+
+                  setModalMenuShow(true);
+                }}
               >
                 {t("menu_lateral.user_datos")}
               </Nav.Link>

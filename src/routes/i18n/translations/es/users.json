@@ -1,7 +1,7 @@
 {
   "menu_lateral": {
-    "user_eventos": "Mis eventos",
-    "user_datos": "Actualizar mis datos",
+    "user_eventos": "Eventos",
+    "user_datos": "Mis datos",
     "cerrar_sesion": "Cerrar sesión",
     "box_datos": "Mis datos"
   },
@@ -75,6 +75,7 @@
     "evCardDescription": "Descripción",
     "evCardsAtletas": "Atletas",
     "evCardModify": "Detalles / Modificar",
-    "evCardDelete": "Ver / Borrar"
+    "evCardDelete": "Ver / Borrar",
+    "evAtheleCard": "Ir al evento"
   }
 }

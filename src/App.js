@@ -5,10 +5,11 @@ import EventsDetails from "./pages/events-details/events-details";
 import Landing from "./pages/landing/landing";
 import Login from "./pages/login/login";
 import BoxPage from "./pages/users-pages/box/box-pages";
-import EventsPages from "./pages/users-pages/users/users-pages";
-import UsersPage from "./pages/users-pages/users/users-pages";
+import UsersPage from "./pages/users-pages/private-users/priv-users";
+import EventsPages from "./pages/users-pages/users/events-pages";
 import Validate from "./pages/validate/validate";
 import PrivateRoute from "./routes/private/private-route";
+import PrivateUserRoute from "./routes/private/private-users-route";
 //import Footer from './components/footer';
 
 function App() {
@@ -26,6 +27,14 @@ function App() {
             <PrivateRoute>
               <BoxPage />
             </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          path="/users"
+          element={
+            <PrivateUserRoute>
+              <UsersPage />
+            </PrivateUserRoute>
           }
         ></Route>
       </Routes>

@@ -1,7 +1,7 @@
 {
   "menu_lateral": {
-    "user_eventos": "My events",
-    "user_datos": "Update my data",
+    "user_eventos": "Events",
+    "user_datos": "My data",
     "cerrar_sesion": "Log out",
     "box_datos": "My data"
   },
@@ -75,6 +75,7 @@
     "evCardDescription": "Description",
     "evCardsAtletas": "Athletes",
     "evCardModify": "Details / Modify",
-    "evCardDelete": "View / Delete"
+    "evCardDelete": "View / Delete",
+    "evAtheleCard": "Go to this event"
   }
 }

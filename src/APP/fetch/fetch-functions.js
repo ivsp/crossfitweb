@@ -211,7 +211,39 @@ export async function addUserToaEvent(body, token) {
     return r;
   } else {
     const data = await r.json();
+    return data;
+  }
+}
 
+export async function addAthlete(body, token) {
+  const r = await fetch(`http://localhost:4000/athletes`, {
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (r.status === 403) {
+    return r;
+  } else {
+    const data = await r.json();
+    return data;
+  }
+}
+
+export async function getAllAtheleteEvents(token) {
+  const r = await fetch(`http://localhost:4000/athletes`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (r.status === 401 || r.status === 403 || r.status === 404) {
+    return r;
+  } else {
+    const data = await r.json();
     return data;
   }
 }
