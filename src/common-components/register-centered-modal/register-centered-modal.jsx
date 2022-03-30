@@ -1,13 +1,17 @@
+import "./registered-centeres-modal.scss";
+
 import { useTranslation } from "react-i18next";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 //import { useState } from "react";
 import { registerNewUser } from "../../APP/fetch/fetch-functions";
+import { useNavigate } from "react-router-dom";
 
 function RegisterCenteredModal(props) {
   const [t] = useTranslation("header");
   const [a] = useTranslation("alerts");
+  const navigate = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -96,11 +100,19 @@ function RegisterCenteredModal(props) {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check
-              type="checkbox"
-              label={`${t("registro.condiciones")}`}
-              required
-            />
+            <div className="d-flex gap-2">
+              <Form.Check
+                type="checkbox"
+                //  label={`${t("registro.condiciones")}`}
+                required
+              />
+              <p
+                className="termsandconditions"
+                onClick={() => navigate("/termsandconditions")}
+              >
+                {t("registro.condiciones")}
+              </p>
+            </div>
           </Form.Group>
           <Button
             variant="primary"

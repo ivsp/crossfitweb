@@ -247,3 +247,22 @@ export async function getAllAtheleteEvents(token) {
     return data;
   }
 }
+
+export async function createNewTestimonie(token, body) {
+  const r = await fetch(`http://localhost:4000/opinions`, {
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (r.status === 401 || r.status === 409 || r.status === 500) {
+    console.log(r);
+    return r;
+  } else {
+    const data = await r.json();
+    console.log(data);
+    return data;
+  }
+}

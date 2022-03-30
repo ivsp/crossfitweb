@@ -1,9 +1,9 @@
 import "./login.scss";
 import React from "react";
-import HeaderLogIn from "./header-login/header-login";
 import HeroLogin from "./hero-login/hero-login";
 import LoginForm from "./login-form/login-form";
 import Footer from "../../components/footer/footer";
+import Header from "../../components/header/header";
 
 function LogIn() {
   const updateThemingCssVariables = () => {
@@ -16,7 +16,7 @@ function LogIn() {
 
   return (
     <React.Fragment>
-      <HeaderLogIn></HeaderLogIn>
+      <Header></Header>
       <HeroLogin></HeroLogin>
       <LoginForm
         show={true}

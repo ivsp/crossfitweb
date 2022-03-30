@@ -13,7 +13,8 @@ import users_es from "./routes/i18n/translations/es/users.json";
 import users_en from "./routes/i18n/translations/en/users.json";
 import landing_en from "./routes/i18n/translations/en/landing.json";
 import landing_es from "./routes/i18n/translations/es/landing.json";
-
+import testimonies_es from "./routes/i18n/translations/es/testimonies.json";
+import testimonies_en from "./routes/i18n/translations/en/testimonies.json";
 import { I18nextProvider } from "react-i18next";
 import LanguageProvider from "./shared/language/language.provider";
 import UserProvider from "./shared/user-info/user.provider";
@@ -30,6 +31,7 @@ i18next.init({
       alerts: alerts_es,
       users: users_es,
       landing: landing_es,
+      testimonies: testimonies_es,
       //aqui incluyo cada uno de los archivos json que quiera incluir
     },
     en: {
@@ -37,6 +39,7 @@ i18next.init({
       alerts: alerts_en,
       users: users_en,
       landing: landing_en,
+      testimonies: testimonies_en,
     },
   },
 });

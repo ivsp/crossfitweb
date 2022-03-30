@@ -102,7 +102,7 @@ function Footer() {
             <p className="text_footer"> Copyright © 2021 - www.targetwod.com</p>
           </Col>
           <Col
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/privatepolicy")}
             xs={{ span: 3, offset: 1 }}
             sm={{ span: 3, offset: 1 }}
             md={{ span: 3, offset: 1 }}
@@ -113,7 +113,7 @@ function Footer() {
             <p className="text_footer">{t("footer.policy")}</p>
           </Col>
           <Col
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/opinions")}
             xs={{ span: 2, offset: 1 }}
             sm={{ span: 2, offset: 1 }}
             md={{ span: 2, offset: 1 }}
@@ -121,7 +121,7 @@ function Footer() {
             xl={{ span: 2, offset: 1 }}
             xxl={{ span: 2, offset: 1 }}
           >
-            <p className="text_footer">{t("footer.contact")}</p>
+            <p className="text_footer">{t("footer.testimonios")}</p>
           </Col>
         </Row>
       </Col>

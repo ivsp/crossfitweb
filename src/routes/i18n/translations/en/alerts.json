@@ -4,6 +4,8 @@
     "creacion_usuario": "We have send a message to you email. Please, click the link to validate your acoount.",
     "usuarioexistente": "This email account already exists. Please choose another one or log in to your account.",
     "usuarioapuntado": "The user has already signed up for this event.",
-    "usuarioapuntado1": "The user has been successfully registered"
+    "usuarioapuntado1": "The user has been successfully registered",
+    "opinionCreada": "Thanks for your testimonie!",
+    "opinionWarning": "You have already post a testimonie! We are very grateful"
   }
 }

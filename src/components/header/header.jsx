@@ -75,9 +75,6 @@ function Header() {
             >
               {t("header.eventos")}
             </Nav.Link>
-            <Nav.Link style={{ color: `${theming.font_color.color}` }} href="">
-              {t("header.entrenamientos")}
-            </Nav.Link>
           </Nav>
         </Col>
         <Col

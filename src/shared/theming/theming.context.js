@@ -1,5 +1,3 @@
-import { createContext } from "react";
-
 /*
 * 1. Crear el contexto para el theming (ThemingContext)
 * 2. Crear el componente provider (ThemingProvider)
@@ -19,6 +17,8 @@ import { createContext } from "react";
 // Creo un array con 2 posiciones, que tendrán los valores para cada tipo de tema
 // [0] --> para ligth
 // [1] --> para dark
+import { createContext } from "react";
+
 export const theme = [
   {
     primary: {

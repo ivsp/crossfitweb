@@ -47,6 +47,7 @@ function LoginForm() {
           textAlign: "center",
           color: `${theming.primary.code}`,
           opacity: "0.9",
+          paddingTop: "3rem",
         }}
       >
         {userData
@@ -59,7 +60,6 @@ function LoginForm() {
       <Container
         className="d-flex flex-column justify-content-center align-items-center"
         style={{
-          width: "50%",
           paddingBottom: "1.5rem",
         }}
       >

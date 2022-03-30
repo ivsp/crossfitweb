@@ -4,6 +4,10 @@ import "./custom.scss";
 import EventsDetails from "./pages/events-details/events-details";
 import Landing from "./pages/landing/landing";
 import Login from "./pages/login/login";
+import NotFound from "./pages/not-found/not-found";
+import Opinions from "./pages/opinions/opinions";
+import PrivacyPolicy from "./pages/privacy-policy/privacy-policy";
+import TermsAndConditions from "./pages/terms-conditions/terms-conditions";
 import BoxPage from "./pages/users-pages/box/box-pages";
 import UsersPage from "./pages/users-pages/private-users/priv-users";
 import EventsPages from "./pages/users-pages/users/events-pages";
@@ -37,6 +41,13 @@ function App() {
             </PrivateUserRoute>
           }
         ></Route>
+        <Route path="/opinions" element={<Opinions />}></Route>
+        <Route path="/privatepolicy" element={<PrivacyPolicy />}></Route>
+        <Route
+          path="/termsandconditions"
+          element={<TermsAndConditions />}
+        ></Route>
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </BrowserRouter>
   );

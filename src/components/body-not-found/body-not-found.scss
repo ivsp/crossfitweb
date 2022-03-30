@@ -1,0 +1,14 @@
+.not-found-image_container{
+    font-family: "rubik-regular";
+width: 100%;
+height: 100vh;
+    background-image: url(./../../assets/images/not-found-page/no-rep.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+}
