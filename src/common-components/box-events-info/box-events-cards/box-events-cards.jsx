@@ -7,6 +7,8 @@ import { useContext, useEffect, useState } from "react";
 import { ThemingContext } from "../../../shared/theming/theming.context";
 import taronja from "./../../../assets/images/taronja.png";
 import madridCship from "./../../../assets/images/events/madridCship.png";
+import blank from "./../../../assets/images/blank-user/user-none.png";
+
 import ModifyEvent from "../modals/modal-modify-event/modal-modify-event";
 import { EventContext } from "../../../shared/event-info/event.context";
 import {
@@ -107,7 +109,7 @@ function BoxEventsCards({ showActive }) {
                       }}
                       className="image_container"
                       variant="top"
-                      src={taronja}
+                      src={e.file ? `http://localhost:4000/${e.file}` : blank}
                     />
                     <Card.Body className="events-body__container">
                       <Card.Title className="card-body_tittle">
@@ -180,7 +182,7 @@ function BoxEventsCards({ showActive }) {
                       }}
                       className="image_container"
                       variant="top"
-                      src={madridCship}
+                      src={e.file ? `http://localhost:4000/${e.file}` : blank}
                     />
                     <Card.Body className="events-body__container">
                       <Card.Title className="card-body_tittle">

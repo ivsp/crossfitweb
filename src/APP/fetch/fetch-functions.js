@@ -68,9 +68,8 @@ export async function getUserData(token) {
 export async function modifyUserData(body, token) {
   const r = await fetch("http://localhost:4000/users", {
     method: "PATCH",
-    body: JSON.stringify(body),
+    body: body,
     headers: {
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
@@ -102,9 +101,8 @@ export async function createEvent(body, token) {
 export async function createNewEvent(body, token) {
   const r = await fetch("http://localhost:4000/boxes", {
     method: "POST",
-    body: JSON.stringify(body),
+    body: body,
     headers: {
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
@@ -120,9 +118,8 @@ export async function createNewEvent(body, token) {
 export async function modifyEvent(body, token, currentName) {
   const r = await fetch(`http://localhost:4000/boxes?name=${currentName}`, {
     method: "PATCH",
-    body: JSON.stringify(body),
+    body: body,
     headers: {
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
@@ -138,7 +135,7 @@ export async function getAllCurrentsEventsByEmail(token) {
   const r = await fetch(`http://localhost:4000/events/box/current`, {
     method: "GET",
     headers: {
-      "Content-Type": "application/json",
+      //      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   });

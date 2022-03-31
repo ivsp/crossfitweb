@@ -2,7 +2,7 @@ import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import imageTaronja from "../../assets/images/taronja.png";
+import blank from "../../assets/images/blank-user/user-none.png";
 import { useContext, useEffect } from "react";
 import { ThemingContext } from "../../shared/theming/theming.context";
 import { useTranslation } from "react-i18next";
@@ -14,13 +14,22 @@ import { getAllCurrentsEvents } from "../../APP/fetch/fetch-functions";
 function BodyEvents() {
   const [theming] = useContext(ThemingContext);
   const [t] = useTranslation("users");
-  const [, , , , currentEventsData, setCurrentsEventsData] =
-    useContext(EventContext);
+  const [
+    ,
+    ,
+    ,
+    ,
+    currentEventsData,
+    setCurrentsEventsData,
+    filterCurrentEventsData,
+    setFilterCurrentEventsData,
+  ] = useContext(EventContext);
   const navigate = useNavigate();
 
   async function getAllEvents() {
     const events = await getAllCurrentsEvents();
     setCurrentsEventsData(events);
+    setFilterCurrentEventsData(events);
   }
 
   useEffect(() => {
@@ -29,59 +38,62 @@ function BodyEvents() {
   }, []);
 
   return (
-    <Card>
-      <Row
-        style={{
-          margin: "0px",
-          padding: "1rem 0rem",
-        }}
-      >
-        <Col
-          style={{
-            padding: "0px",
-            maxHeight: "80vh",
-            overflowY: "auto",
-          }}
-          xs={12}
-          sm={12}
-          md={12}
-          lg={6}
-          xl={6}
-          xxl={6}
-        >
-          {currentEventsData?.map((e, i) => {
-            return (
-              <Row
-                className="p-md-3 d-flex justify-content-center"
+    <Row
+      style={{
+        margin: "0px",
+        padding: "1rem 0rem",
+        paddingBottom: "10rem",
+      }}
+    >
+      {filterCurrentEventsData.length !== 0 ? (
+        filterCurrentEventsData?.map((e, i) => {
+          return (
+            <Col
+              style={{
+                padding: "1rem 1rem",
+              }}
+              xs={{ span: 10, offset: 1 }}
+              sm={{ span: 10, offset: 1 }}
+              md={{ span: 6, offset: 0 }}
+              lg={{ span: 4, offset: 1 }}
+              xl={{ span: 3, offset: 1 }}
+              xxl={{ span: 3, offset: 1 }}
+            >
+              <Card
+                className="p-md-3 d-flex flex-row  flex-lg-column justify-content-between align-items-center"
                 key={i}
                 style={{
                   margin: "0px",
-                  borderTop: "1px solid #CCCCCC",
+                  width: "100%",
+                  height: "100%",
                 }}
               >
                 <Col
                   style={{
                     padding: "0px",
                   }}
-                  xs={12}
+                  xs={4}
                   sm={6}
-                  md={6}
-                  lg={6}
-                  xl={6}
-                  xxl={6}
+                  md={4}
+                  lg={12}
+                  xl={12}
+                  xxl={12}
                 >
-                  <Card.Img className="mt-xl-3 " src={imageTaronja} />
+                  <Card.Img
+                    className="mt-xl-3 "
+                    src={e.file ? `http://localhost:4000/${e.file}` : blank}
+                  />
                 </Col>
                 <Col
                   style={{
                     padding: "0px",
                   }}
-                  xs={12}
+                  xs={8}
                   sm={6}
-                  md={6}
-                  lg={6}
-                  xl={6}
-                  xxl={6}
+                  md={8}
+                  lg={12}
+                  xl={12}
+                  xxl={12}
                 >
                   <Card
                     style={{
@@ -90,7 +102,7 @@ function BodyEvents() {
                     }}
                   >
                     <Card.Body
-                      className="d-flex flex-column justify-content-around align-items-stretch"
+                      className="d-flex flex-column justify-content-between align-items-stretch"
                       style={{
                         height: "100%",
                       }}
@@ -173,27 +185,19 @@ function BodyEvents() {
                     </Card.Body>
                   </Card>
                 </Col>
-              </Row>
-            );
-          })}
-        </Col>
-        <Col
+              </Card>
+            </Col>
+          );
+        })
+      ) : (
+        <div
           style={{
-            padding: "0px",
-            backgroundColor: "grey",
-            maxHeight: "100%",
+            height: "80vh",
+            backGroundColor: "#FFFFFF",
           }}
-          xs={0}
-          sm={0}
-          md={12}
-          lg={6}
-          xl={6}
-          xxl={6}
-        >
-          MAPA
-        </Col>
-      </Row>
-    </Card>
+        ></div>
+      )}
+    </Row>
   );
 }
 

@@ -5,7 +5,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useContext, useEffect } from "react";
 import { ThemingContext } from "../../../shared/theming/theming.context";
-import taronja from "./../../../assets/images/taronja.png";
+import blank from "./../../../assets/images/blank-user/user-none.png";
 import { EventContext } from "../../../shared/event-info/event.context";
 import { getAllAtheleteEvents } from "../../../APP/fetch/fetch-functions";
 import { returnDateByTimeStamp } from "../../../APP/functions/functions";
@@ -72,7 +72,7 @@ function UsersEventsCards() {
                   }}
                   className="image_container"
                   variant="top"
-                  src={taronja}
+                  src={e.file ? `http://localhost:4000/${e.file}` : blank}
                 />
                 <Card.Body className="events-body__container">
                   <Card.Title className="card-body_tittle">

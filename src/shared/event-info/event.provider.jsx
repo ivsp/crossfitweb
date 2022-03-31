@@ -10,7 +10,7 @@ function EventProvider({ children }) {
   const [currentBoxEventsData, setCurrentBoxEventsData] = useState([]);
   const [pastBoxEventsData, setPastBoxEventsData] = useState([]);
   const [currentsEventsData, setCurrentsEventsData] = useState([]);
-
+  const [filterCurrentEventsData, setFilterCurrentEventsData] = useState([]);
   async function getCurrentEv(token) {
     const currentsEvents = await getAllCurrentsEventsByEmail(token);
     setCurrentBoxEventsData(currentsEvents);
@@ -24,6 +24,7 @@ function EventProvider({ children }) {
   async function getAllEvents() {
     const events = await getAllCurrentsEvents();
     setCurrentsEventsData(events);
+    setFilterCurrentEventsData(events);
   }
 
   useEffect(() => {
@@ -46,6 +47,8 @@ function EventProvider({ children }) {
         setPastBoxEventsData,
         currentsEventsData,
         setCurrentsEventsData,
+        filterCurrentEventsData,
+        setFilterCurrentEventsData,
       ]}
     >
       {children}

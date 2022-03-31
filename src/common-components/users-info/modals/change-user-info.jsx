@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
 import { modifyUserData } from "../../../APP/fetch/fetch-functions";
 
-function ChangeBoxInfo(props) {
+function ChangeUserInfo(props) {
   const [t] = useTranslation("users");
   //const [userData, setUserData] = useContext(UserContext);
   const modUserData = async (e) => {
@@ -45,11 +45,10 @@ function ChangeBoxInfo(props) {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicName">
-            <Form.Label> {`${t("actualizar_datos.nombreBox")}`}</Form.Label>
+            <Form.Label> {`${t("actualizar_datos.nombre")}`}</Form.Label>
             <Form.Control
               name="name"
               type="text"
-              placeholder={`${t("actualizar_datos.nombreBox")}`}
               defaultValue={
                 props.userdata?.name ? `${props.userdata.name}` : ""
               }
@@ -57,18 +56,20 @@ function ChangeBoxInfo(props) {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicAddres">
-            <Form.Label> {`${t("actualizar_datos.direccion")}`}</Form.Label>
+          <Form.Group className="mb-3" controlId="formBasicSurname">
+            <Form.Label> {t("actualizar_datos.apellidos")}</Form.Label>
             <Form.Control
-              name="addres"
+              name="surname"
               type="text"
-              placeholder={`${t("actualizar_datos.direccion")}`}
               defaultValue={
-                props.userdata?.addres ? `${props.userdata.addres}` : ""
+                props.userData?.surname
+                  ? `${props.userData?.surname}`
+                  : `${t("actualizar_datos.apellidos")}`
               }
               required
             />
           </Form.Group>
+
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label> {`${t("actualizar_datos.email")}`}</Form.Label>
             <Form.Control
@@ -81,40 +82,13 @@ function ChangeBoxInfo(props) {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicCity">
-            <Form.Label> {`${t("actualizar_datos.ciudad")}`}</Form.Label>
+          <Form.Group className="mb-3" controlId="formBasicDate">
+            <Form.Label>{t("actualizar_datos.fecha_nacimiento")}</Form.Label>
             <Form.Control
-              name="city"
-              type="text"
-              placeholder={`${t("actualizar_datos.ciudad")}`}
+              name="birthdate"
+              type="date"
               defaultValue={
-                props.userdata?.city ? `${props.userdata.city}` : ""
-              }
-              required
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCity">
-            <Form.Label> {`${t("actualizar_datos.provincia")}`}</Form.Label>
-            <Form.Control
-              name="province"
-              type="text"
-              placeholder={`${t("actualizar_datos.provincia")}`}
-              defaultValue={
-                props.userdata?.province ? `${props.userdata.province}` : ""
-              }
-              required
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCode">
-            <Form.Label> {`${t("actualizar_datos.cp")}`}</Form.Label>
-            <Form.Control
-              name="postalCode"
-              type="text"
-              placeholder={`${t("actualizar_datos.cp")}`}
-              defaultValue={
-                props.userdata?.postal_code
-                  ? `${props.userdata.postal_code}`
-                  : ""
+                props.userdata?.birthDate ? `${props.userdata.birthDate}` : ""
               }
               required
             />
@@ -131,6 +105,32 @@ function ChangeBoxInfo(props) {
               required
             />
           </Form.Group>
+
+          {props.userData?.gender ? (
+            <Form.Group
+              className="mb-3 d-flex gap-3"
+              controlId="formBasicCheckbox"
+              required
+            >
+              <Form.Check
+                name="gender"
+                type="radio"
+                value="male"
+                label={`${t("actualizar_datos.sexo_h")}`}
+                required
+              />
+              <Form.Check
+                name="gender"
+                type="radio"
+                value="female"
+                label={`${t("actualizar_datos.sexo_m")}`}
+                required
+              />
+            </Form.Group>
+          ) : (
+            ""
+          )}
+
           <Button
             variant="primary"
             type="submit"
@@ -147,4 +147,4 @@ function ChangeBoxInfo(props) {
   );
 }
 
-export default ChangeBoxInfo;
+export default ChangeUserInfo;

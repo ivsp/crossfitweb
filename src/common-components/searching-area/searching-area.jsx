@@ -1,17 +1,62 @@
 import "./searching-area.scss";
 import { ThemingContext } from "../../shared/theming/theming.context";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { EventContext } from "../../shared/event-info/event.context";
 
 function SearchingArea() {
   const [t] = useTranslation("header");
+  const [
+    ,
+    ,
+    ,
+    ,
+    currentEventsData,
+    setCurrentsEventsData,
+    filterCurrentEventsData,
+    setFilterCurrentEventsData,
+  ] = useContext(EventContext);
 
+  const [eventName, setEventName] = useState("");
+  const [city, setCity] = useState("");
   const [theming] = useContext(ThemingContext);
+
+  const filterByNameAndCity = (currentEvents, eventNameSearch, citySearch) => {
+    const event = eventNameSearch.toLowerCase();
+    const city = citySearch.toLowerCase();
+    return currentEvents.filter(
+      (e) =>
+        e.eventName.toLowerCase().includes(event) &&
+        e.eventCity.toLowerCase().includes(city)
+    );
+  };
+
+  const filterByName = (e) => {
+    setEventName(e.target.value);
+    const newFiltered = filterByNameAndCity(
+      currentEventsData,
+      e.target.value,
+      city
+    );
+    setFilterCurrentEventsData(newFiltered);
+  };
+
+  const filterByCity = (e) => {
+    setCity(e.target.value);
+    const newFiltered = filterByNameAndCity(
+      currentEventsData,
+      eventName,
+      e.target.value
+    );
+    console.log(newFiltered);
+    setFilterCurrentEventsData(newFiltered);
+  };
+
   return (
     <Card
       bg={`${theming.primary.color}`}
@@ -24,7 +69,7 @@ function SearchingArea() {
         <Form className="d-flex justify-content-evenly">
           <Form.Group
             className="pointer  text-center d-flex flex-column align-items-center"
-            controlId="formBasicEmail"
+            controlId="formBasic"
             style={{ width: "45%" }}
           >
             <Form.Label
@@ -35,6 +80,7 @@ function SearchingArea() {
               {t("busqueda.localización")}
             </Form.Label>
             <Form.Control
+              onChange={filterByCity}
               style={{
                 fontFamily: "rubik-regular",
               }}
@@ -57,6 +103,7 @@ function SearchingArea() {
                 {t("busqueda.categoria")}
               </Form.Label>
               <Form.Control
+                onChange={filterByName}
                 style={{
                   fontFamily: "rubik-regular",
                 }}

@@ -18,9 +18,9 @@ function ThemingSelector() {
 
   return (
     <React.Fragment>
-      <Form onChange={changeTheme}>
-        <Form.Check className="toggle" type="switch" id={theming} />
-      </Form>
+      <div className="show-selector" onChange={changeTheme}>
+        <Form.Check className="toggle " type="switch" id={theming} />
+      </div>
     </React.Fragment>
   );
 }

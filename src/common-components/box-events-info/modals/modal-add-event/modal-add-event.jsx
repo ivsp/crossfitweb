@@ -7,7 +7,6 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import { useContext } from "react";
 import { ThemingContext } from "../../../../shared/theming/theming.context";
-import giraldaCr from "./../../../../assets/images/boxes/giralda.png";
 import { EventContext } from "../../../../shared/event-info/event.context";
 import { createNewEvent } from "../../../../APP/fetch/fetch-functions";
 import { getCurrentDate } from "../../../../APP/functions/functions";
@@ -107,36 +106,37 @@ function AddEvent({ show, setShow }) {
       );
     } else {
       const token = localStorage.getItem("token");
-      const body = {
-        eventName: e.target.eventName.value,
-        eventCity: e.target.eventCity.value,
-        eventAddres: e.target.eventAddres.value,
-        eventStartDate: new Date(e.target.eventStartDate.value).getTime(),
-        eventEndDate: new Date(e.target.eventEndDate.value).getTime(),
-        eventLimitPerson: e.target.eventLimitPerson.value,
-        eventJoinPerson: [],
-        eliteCategory: e.target.elite_category.checked,
-        rxCategory: e.target.rx_category.checked,
-        scCategory: e.target.sc_category.checked,
-        teamCategory: e.target.team_category.checked,
-        shortDescription: e.target.shortDescription.value,
-        longDescription: e.target.longDescription.value,
-        clasificationType: e.target.clasificationType.value,
-        clasificationStartDate: new Date(
-          e.target.clasificationStartDate.value
-        ).getTime(),
-        clasificationEndDate: new Date(
-          e.target.clasificationEndDate.value
-        ).getTime(),
-        semifinalType: e.target.semifinalType.value,
-        semifinalStartDate: new Date(
-          e.target.semifinalStartDate.value
-        ).getTime(),
-        semifinalEndDate: new Date(e.target.semifinalEndDate.value).getTime(),
-        finalType: e.target.finalType.value,
-        finalStartDate: new Date(e.target.finalStartDate.value).getTime(),
-        finalEndDate: new Date(e.target.finalEndDate.value).getTime(),
-      };
+      const body = new FormData(e.target);
+      body.set(
+        "eventStartDate",
+        new Date(e.target.eventStartDate.value).getTime()
+      );
+      body.set("eventEndDate", new Date(e.target.eventEndDate.value).getTime());
+      body.set("eliteCategory", e.target.elite_category.checked);
+      body.set("rxCategory", e.target.rx_category.checked);
+      body.set("scCategory", e.target.sc_category.checked);
+      body.set("teamCategory", e.target.team_category.checked);
+      body.set(
+        "clasificationStartDate",
+        new Date(e.target.clasificationStartDate.value).getTime()
+      );
+      body.set(
+        "clasificationEndDate",
+        new Date(e.target.clasificationEndDate.value).getTime()
+      );
+      body.set(
+        "semifinalStartDate",
+        new Date(e.target.semifinalStartDate.value).getTime()
+      );
+      body.set(
+        "semifinalEndDate",
+        new Date(e.target.semifinalEndDate.value).getTime()
+      );
+      body.set(
+        "finalStartDate",
+        new Date(e.target.finalStartDate.value).getTime()
+      );
+      body.set("finalEndDate", new Date(e.target.finalEndDate.value).getTime());
 
       addEvents(body, token);
       setShow(false);
@@ -196,20 +196,18 @@ function AddEvent({ show, setShow }) {
                 xxl={{ span: 2, offset: 0 }}
               >
                 <div className="d-flex flex-column align-items-center">
-                  <Card.Img
-                    className="image_profile"
-                    variant="top"
-                    src={giraldaCr}
-                  />
-                  <Button
-                    className="change-image-button"
-                    variant={theming.primary.color}
-                    style={{
-                      fontFamily: "rubik-regular",
-                    }}
-                  >
-                    Cambiar Imagen
-                  </Button>
+                  <Form.Group className="mb-3" controlId="formBasicFile">
+                    <Form.Label>
+                      {" "}
+                      {`${t("actualizar_datos.imagen")}`}
+                    </Form.Label>
+                    <Form.Control
+                      name="file"
+                      type="file"
+                      placeholder="select an image"
+                      required
+                    />
+                  </Form.Group>
                 </div>
               </Col>
               <Col

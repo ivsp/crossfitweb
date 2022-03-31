@@ -3,4 +3,18 @@
     background-color: var(--primary-500);
 }
 
+.show-selector{
+    display: none;
+        }
+
+    
+    @media only screen and (min-width: 1400px) {
+        .show-selector{
+    display: block;
+        }
+      }
+    
+ 
+
+
 @import '../../../custom'

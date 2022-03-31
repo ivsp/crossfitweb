@@ -2,12 +2,12 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import giraldaCr from "./../../assets/images/boxes/giralda.png";
+import blankUser from "./../../assets/images/blank-user/user-none.png";
 import { useContext, useState } from "react";
 import { ThemingContext } from "../../shared/theming/theming.context";
 import { UserContext } from "../../shared/user-info/user.context";
 import { useTranslation } from "react-i18next";
-import ChangeBoxInfo from "../box-info/modals/change-box-info";
+import ChangeUserInfo from "./modals/change-user-info";
 
 function UsersInfo() {
   const [theming] = useContext(ThemingContext);
@@ -27,36 +27,28 @@ function UsersInfo() {
       >
         <Card className="box-info_container">
           <div className="image_container">
-            <Card.Img className="image_profile" variant="top" src={giraldaCr} />
+            <Card.Img
+              className="image_profile"
+              variant="top"
+              src={
+                userData?.file
+                  ? `http://localhost:4000/${userData.file}`
+                  : blankUser
+              }
+            />
           </div>
           <Card.Body>
             <Card.Title className="box-name">{userData.name}</Card.Title>
-            <Card.Text className="tittle-description">
-              {" "}
-              {t("userInfo.direccion")}
-            </Card.Text>
-            <Card.Text className="tittle-value">{userData.addres}</Card.Text>
+            <Card.Text className="tittle-description"> </Card.Text>
+            <Card.Text className="tittle-description">Apellidos</Card.Text>
+            <Card.Text className="tittle-value">{userData.surname}</Card.Text>
             <div className="location-data_container">
               <div>
                 <Card.Text className="tittle-description">
-                  {t("userInfo.ciudad")}
-                </Card.Text>
-                <Card.Text className="tittle-value">{userData.city}</Card.Text>
-              </div>
-              <div>
-                <Card.Text className="tittle-description">
-                  {t("userInfo.provincia")}
+                  Fecha de nacimiento
                 </Card.Text>
                 <Card.Text className="tittle-value">
-                  {userData.province}
-                </Card.Text>
-              </div>
-              <div>
-                <Card.Text className="tittle-description">
-                  {t("userInfo.cp")}
-                </Card.Text>
-                <Card.Text className="tittle-value">
-                  {userData.postal_code}
+                  {userData.birthdate}
                 </Card.Text>
               </div>
             </div>
@@ -81,12 +73,12 @@ function UsersInfo() {
           </Card.Body>
         </Card>
       </Col>
-      <ChangeBoxInfo
+      <ChangeUserInfo
         show={modalModifyDataShow}
         onHide={() => setModalModifyDataShow(false)}
         userdata={userData}
         setUserdata={setUserData}
-      ></ChangeBoxInfo>
+      ></ChangeUserInfo>
     </Row>
   );
 }

@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import giraldaCr from "./../../assets/images/boxes/giralda.png";
+import blankUser from "./../../assets/images/blank-user/user-none.png";
 import { useContext, useState } from "react";
 import { ThemingContext } from "../../shared/theming/theming.context";
 import ChangeBoxInfo from "./modals/change-box-info";
@@ -28,7 +28,15 @@ function BoxInfo() {
       >
         <Card className="box-info_container">
           <div className="image_container">
-            <Card.Img className="image_profile" variant="top" src={giraldaCr} />
+            <Card.Img
+              className="image_profile"
+              variant="top"
+              src={
+                userData?.file
+                  ? `http://localhost:4000/${userData.file}`
+                  : blankUser
+              }
+            />
           </div>
           <Card.Body>
             <Card.Title className="box-name">{userData.name}</Card.Title>
@@ -57,7 +65,7 @@ function BoxInfo() {
                   {t("userInfo.cp")}
                 </Card.Text>
                 <Card.Text className="tittle-value">
-                  {userData.postal_code}
+                  {userData.postalCode}
                 </Card.Text>
               </div>
             </div>
@@ -84,6 +92,7 @@ function BoxInfo() {
       </Col>
       <ChangeBoxInfo
         show={modalModifyDataShow}
+        setShow={setModalModifyDataShow}
         onHide={() => setModalModifyDataShow(false)}
         userdata={userData}
         setUserdata={setUserData}

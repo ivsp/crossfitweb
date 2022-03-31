@@ -67,6 +67,7 @@ function LateralMenu(props) {
           aria-labelledby="contained-modal-title-vcenter"
           style={{
             opacity: "1",
+            fontFamily: "rubik-regular",
           }}
           centered
         >
@@ -114,7 +115,7 @@ function LateralMenu(props) {
                   {" "}
                   {t("actualizar_datos.fecha_nacimiento")}
                 </Form.Label>
-                <Form.Control name="date" type="date" required />
+                <Form.Control name="birthdate" type="date" required />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicPhone">
                 <Form.Label> {t("actualizar_datos.telefono")}</Form.Label>

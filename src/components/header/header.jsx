@@ -13,6 +13,7 @@ import NavUserButton from "../../common-components/nav-user-bottom/nav-user-butt
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrosshairs } from "@fortawesome/free-solid-svg-icons";
+import ThemingSelector from "../../common-components/theming-selector/theming-selector";
 
 function Header() {
   const [language, setLanguage] = useContext(LanguageContext);
@@ -93,6 +94,7 @@ function Header() {
             onchangeLanguage={onchangeLanguage}
             language={language}
           ></LanguageButton>
+          <ThemingSelector></ThemingSelector>
         </Col>
       </Container>
     </Navbar>

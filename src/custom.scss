@@ -13,6 +13,8 @@
 // $primary-800: #665A00 !default;
 // $primary-900: #332D00 !default;
 
+
+//Paleta de ligth
 $primary: #333333 !default;
 $secondary: #FFFFFF !default;
 $strong-details: #F8E71C !default;
@@ -24,6 +26,18 @@ $font-color: #FFFFFF !default;
 $warning: #fdcb4b !default;
 $succses: #7cff6b !default;
 
+
+//Paleta de dark
+
+$primary-dark: #0f0535 !default;
+$secondary-dark: #FFFFFF !default;
+$strong-details-dark: #dd8a0d !default;
+$soft-details-dark: #8a570a !default;
+
+
+//$neutral-100-dark:#CCCCCC !default;
+//$neutral-200-dark: #333333 !default;
+//$neutral-300-dark: #333333 !default;
 
 
 
@@ -82,19 +96,20 @@ $btn-active-border-tint-amount:   0% !default;
 
 $theme-colors: (
 
-        "primary":          $primary,
-        "secondary":        $secondary,
-        "strong-details":   $strong-details,
-        "soft-details":     $soft-details,
-        "neutral-100":      $neutral-100,
-        "neutral-200":      $neutral-200,
-        "neutral-300":      $neutral-300,
-        "font-color":       $font-color,
-        "warning":          $warning,
-        "succses":          $succses
-
-
-
+        "primary":             $primary,
+        "secondary":           $secondary,
+        "strong-details":      $strong-details,
+        "soft-details":        $soft-details,
+        "neutral-100":         $neutral-100,
+        "neutral-200":         $neutral-200,
+        "neutral-300":         $neutral-300,
+        "font-color":          $font-color,
+        "warning":             $warning,
+        "succses":             $succses,
+        "primary-dark":        $primary-dark,
+        "secondary-dark":      $secondary-dark,
+        "strong-details-dark": $strong-details-dark,
+        "soft-details-dark":   $soft-details-dark,
     // "primary-100": $primary-100,
     // "primary-200": $primary-200,
     // "primary-300": $primary-300,

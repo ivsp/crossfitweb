@@ -61,13 +61,41 @@ export const theme = [
   },
   {
     primary: {
-      color: "neutral-700",
+      color: "primary-dark",
+      code: "#0f0535 ",
     },
     secondary: {
+      color: "secondary-dark",
+      code: "#FFFFFF ",
+    },
+    strong_details: {
+      color: "strong-details-dark",
+      code: "##dd8a0d ",
+    },
+    soft_details: {
+      color: "soft-details-dark",
+      code: "#8a570a ",
+    },
+    neutral_100: {
       color: "neutral-100",
+      code: "#CCCCCC ",
+    },
+    neutral_200: {
+      color: "neutral-200",
+      code: "#999999 ",
+    },
+    neutral_300: {
+      color: "neutral-300",
+      code: "#696969 ",
     },
     typography: {
-      color: "red",
+      color: "black",
+    },
+    font_color: {
+      color: "#FFFFFF",
+    },
+    bg: {
+      color: "#FFFFFF",
     },
   },
 ];

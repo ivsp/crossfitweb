@@ -25,7 +25,7 @@
   "busqueda": {
     "localización": "Lugar",
     "loc_enter": "Introduce una ciudad",
-    "categoria": "Categoría",
-    "cat_enter": "Introduzca una categoría"
+    "categoria": "Evento",
+    "cat_enter": "Nombre del evento"
   }
 }

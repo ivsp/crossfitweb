@@ -2,7 +2,7 @@ import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import imageTaronja from "../../assets/images/taronja.png";
+import blank from "../../assets/images/blank-user/user-none.png";
 import { useContext, useEffect, useState } from "react";
 import { ThemingContext } from "../../shared/theming/theming.context";
 import { useTranslation } from "react-i18next";
@@ -26,6 +26,7 @@ function BodyEventsDetails() {
   const [alertErrShow, setAlertErrShow] = useState(false);
   const [alertSuccShow, setAlertSuccShow] = useState(false);
 
+  //para mi yo del futuro: No seas chapuzas, crea una maldita función para traer un evento por el nombre
   async function getAllEvents() {
     const events = await getAllCurrentsEvents();
     setCurrentsEventsData(events);
@@ -43,6 +44,7 @@ function BodyEventsDetails() {
       eventStartDate: eventDetails.eventStartDate,
       eventEndDate: eventDetails.eventEndDate,
       eventCity: eventDetails.eventCity,
+      file: eventDetails.file,
     };
     const token = localStorage.getItem("token");
     if (token && token !== undefined) {
@@ -100,7 +102,11 @@ function BodyEventsDetails() {
                 style={{
                   height: "200px",
                 }}
-                src={imageTaronja}
+                src={
+                  eventDetails?.file
+                    ? `http://localhost:4000/${eventDetails.file}`
+                    : blank
+                }
                 alt=""
               />
             </Col>
