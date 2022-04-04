@@ -11,6 +11,7 @@
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.1.3",
+    "env-cmd": "^10.1.0",
     "i18n-react": "^0.7.0",
     "i18next": "^21.6.14",
     "react": "^17.0.2",
@@ -26,7 +27,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "local": "env-cmd -e LOCAL npm run start",
+    "cloud": "env-cmd -e CLOUD npm run build"
   },
   "eslintConfig": {
     "extends": [

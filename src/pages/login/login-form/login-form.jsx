@@ -31,11 +31,11 @@ function LoginForm() {
       console.log(1);
       //redirijo a la pagina de usuario y guardo el token en el local/session access_token: token
       localStorage.setItem("token", data.access_token);
-      navigate("/users");
+      navigate("/");
     } else if (data.type === "box") {
       //redirijo a la pagina de centtros y guardo el token en el local/session access_token: token
       localStorage.setItem("token", data.access_token);
-      navigate("/boxes");
+      navigate("/");
     }
   };
 

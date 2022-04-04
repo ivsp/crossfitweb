@@ -10,9 +10,9 @@ import andalusiImg from "./../../../assets/images/events/andalusiC.jpg";
 import madridCship from "./../../../assets/images/events/madridCship.png";
 import malagaTd from "./../../../assets/images/events/malagaTd.png";
 import BoxesCards from "../../../common-components/boxes-cards/boxes-cards";
-import giralda from "./../../../assets/images/boxes/giralda.png";
-import underground from "./../../../assets/images/boxes/underground.png";
-import muralla from "./../../../assets/images/boxes/muralla.jpg";
+import giraldaimg from "./../../../assets/images/boxes/giralda.png";
+import undergroundimg from "./../../../assets/images/boxes/underground.png";
+import murallaimg from "./../../../assets/images/boxes/muralla.jpg";
 import { useTranslation } from "react-i18next";
 
 function FindEvent() {
@@ -20,14 +20,46 @@ function FindEvent() {
   const navigate = useNavigate();
   const [t] = useTranslation("landing");
 
-  const cities = ["Madrid", "Sevilla", "Málaga"];
+  const madrid = {
+    name: "Madrid",
+    description:
+      "Vuelve a Madrid la competición de crossFit más cañera y exigente de España. Apúntate y demuestra de que estás hecho!",
+  };
+
+  const sevilla = {
+    name: "Sevilla",
+    description:
+      "Sevilla realiza de nuevo una nueva edición de de su competición por excelencia. Los mejores atletas de toda Andalucía juntos para pasar un fin de semana increíble!",
+  };
+  const malaga = {
+    name: "Málaga",
+    description:
+      "Málaga, verano, sol, playa y CROSSFIT. No te puedes perder esta magnífica competición y disfrutar de un fin de semana inolvidable.",
+  };
+  const cities = [madrid, sevilla, malaga];
+
   const events = [madridCship, andalusiImg, malagaTd];
-  const boxes = [giralda, underground, muralla];
-  const boxesNames = [
-    "Giralda CrossFit",
-    "CrossFit Underground",
-    "CrossFit la Muralla",
-  ];
+  const boxesimg = [giraldaimg, undergroundimg, murallaimg];
+
+  const giraldaCr = {
+    name: "Giralda CrossFit",
+    description:
+      "Gracias a Wod Target pudimos juntar a la mayoría de los boxes de Sevilla y crear una comunidad de crossfit en la ciudad.",
+  };
+
+  const underground = {
+    name: "CrossFit Underground",
+    description:
+      "Una experiencia increíble. Disfrutamos de un fin de semana espectacular!",
+  };
+
+  const muralla = {
+    name: "CrossFit la Muralla",
+    description:
+      "Reunimos a atletas de diferentes ciudades de Málaga en una combinación de crossfit y buen ambiente.",
+  };
+
+  const boxesNames = [giraldaCr, underground, muralla];
   return (
     <React.Fragment>
       <Row
@@ -146,7 +178,7 @@ function FindEvent() {
               {/* {'Esto deberia ser un map de cards'} */}
               {boxesNames.map((b, i) => {
                 return (
-                  <BoxesCards key={i} box={b} image={boxes[i]}></BoxesCards>
+                  <BoxesCards key={i} box={b} image={boxesimg[i]}></BoxesCards>
                 );
               })}
             </Col>

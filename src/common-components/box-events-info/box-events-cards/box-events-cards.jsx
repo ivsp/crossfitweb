@@ -109,7 +109,11 @@ function BoxEventsCards({ showActive }) {
                       }}
                       className="image_container"
                       variant="top"
-                      src={e.file ? `http://localhost:4000/${e.file}` : blank}
+                      src={
+                        e.file
+                          ? `${process.env.REACT_APP_URL}/${e.file}`
+                          : blank
+                      }
                     />
                     <Card.Body className="events-body__container">
                       <Card.Title className="card-body_tittle">
@@ -182,7 +186,11 @@ function BoxEventsCards({ showActive }) {
                       }}
                       className="image_container"
                       variant="top"
-                      src={e.file ? `http://localhost:4000/${e.file}` : blank}
+                      src={
+                        e.file
+                          ? `${process.env.REACT_APP_URL}/${e.file}`
+                          : blank
+                      }
                     />
                     <Card.Body className="events-body__container">
                       <Card.Title className="card-body_tittle">

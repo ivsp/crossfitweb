@@ -1,5 +1,5 @@
 export async function registerNewUser(body) {
-  const r = await fetch("http://localhost:4000/auth/register", {
+  const r = await fetch(`${process.env.REACT_APP_URL}/auth/register`, {
     method: "POST",
     body: JSON.stringify(body),
     headers: {
@@ -11,11 +11,11 @@ export async function registerNewUser(body) {
 }
 
 export async function validateNewUser(token) {
-  await fetch(`http://localhost:4000/auth/validate?token=${token}`);
+  await fetch(`${process.env.REACT_APP_URL}/auth/validate?token=${token}`);
 }
 
 export async function logInUser(body) {
-  const r = await fetch("http://localhost:4000/auth/login", {
+  const r = await fetch(`${process.env.REACT_APP_URL}/auth/login`, {
     method: "POST",
     body: JSON.stringify(body),
     headers: {
@@ -32,7 +32,7 @@ export async function logInUser(body) {
 }
 
 // export async function logOutUser(token) {
-//   const r = await fetch("http://localhost:4000/users", {
+//   const r = await fetch(`${process.env.REACT_APP_URL}/users`, {
 //     method: "POST",
 
 //     headers: {
@@ -50,7 +50,7 @@ export async function logInUser(body) {
 // }
 
 export async function getUserData(token) {
-  const r = await fetch("http://localhost:4000/users", {
+  const r = await fetch(`${process.env.REACT_APP_URL}/users`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -66,7 +66,7 @@ export async function getUserData(token) {
 }
 
 export async function modifyUserData(body, token) {
-  const r = await fetch("http://localhost:4000/users", {
+  const r = await fetch(`${process.env.REACT_APP_URL}/users`, {
     method: "PATCH",
     body: body,
     headers: {
@@ -82,7 +82,7 @@ export async function modifyUserData(body, token) {
 }
 //
 export async function createEvent(body, token) {
-  const r = await fetch("http://localhost:4000/boxes", {
+  const r = await fetch(`${process.env.REACT_APP_URL}/boxes`, {
     method: "POST",
     body: JSON.stringify(body),
     headers: {
@@ -99,7 +99,7 @@ export async function createEvent(body, token) {
 }
 
 export async function createNewEvent(body, token) {
-  const r = await fetch("http://localhost:4000/boxes", {
+  const r = await fetch(`${process.env.REACT_APP_URL}/boxes`, {
     method: "POST",
     body: body,
     headers: {
@@ -116,13 +116,16 @@ export async function createNewEvent(body, token) {
 }
 
 export async function modifyEvent(body, token, currentName) {
-  const r = await fetch(`http://localhost:4000/boxes?name=${currentName}`, {
-    method: "PATCH",
-    body: body,
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const r = await fetch(
+    `${process.env.REACT_APP_URL}/boxes?name=${currentName}`,
+    {
+      method: "PATCH",
+      body: body,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
   if (r.status === 401 || r.status === 403 || r.status === 404) {
     return r;
   } else {
@@ -132,7 +135,7 @@ export async function modifyEvent(body, token, currentName) {
 }
 
 export async function getAllCurrentsEventsByEmail(token) {
-  const r = await fetch(`http://localhost:4000/events/box/current`, {
+  const r = await fetch(`${process.env.REACT_APP_URL}/events/box/current`, {
     method: "GET",
     headers: {
       //      "Content-Type": "application/json",
@@ -148,7 +151,7 @@ export async function getAllCurrentsEventsByEmail(token) {
 }
 
 export async function getAllPastsEventsByEmail(token) {
-  const r = await fetch(`http://localhost:4000/events/box/past`, {
+  const r = await fetch(`${process.env.REACT_APP_URL}/events/box/past`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -164,7 +167,7 @@ export async function getAllPastsEventsByEmail(token) {
 }
 
 export async function deletePastEvent(body, token) {
-  const r = await fetch(`http://localhost:4000/events/box/past`, {
+  const r = await fetch(`${process.env.REACT_APP_URL}/events/box/past`, {
     method: "POST",
     body: JSON.stringify(body),
     headers: {
@@ -181,7 +184,7 @@ export async function deletePastEvent(body, token) {
 }
 
 export async function getAllCurrentsEvents() {
-  const r = await fetch(`http://localhost:4000/events`, {
+  const r = await fetch(`${process.env.REACT_APP_URL}/events`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -196,7 +199,7 @@ export async function getAllCurrentsEvents() {
 }
 
 export async function addUserToaEvent(body, token) {
-  const r = await fetch(`http://localhost:4000/events/user`, {
+  const r = await fetch(`${process.env.REACT_APP_URL}/events/user`, {
     method: "POST",
     body: JSON.stringify(body),
     headers: {
@@ -213,7 +216,7 @@ export async function addUserToaEvent(body, token) {
 }
 
 export async function addAthlete(body, token) {
-  const r = await fetch(`http://localhost:4000/athletes`, {
+  const r = await fetch(`${process.env.REACT_APP_URL}/athletes`, {
     method: "POST",
     body: JSON.stringify(body),
     headers: {
@@ -230,7 +233,7 @@ export async function addAthlete(body, token) {
 }
 
 export async function getAllAtheleteEvents(token) {
-  const r = await fetch(`http://localhost:4000/athletes`, {
+  const r = await fetch(`${process.env.REACT_APP_URL}/athletes`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -246,7 +249,7 @@ export async function getAllAtheleteEvents(token) {
 }
 
 export async function createNewTestimonie(token, body) {
-  const r = await fetch(`http://localhost:4000/opinions`, {
+  const r = await fetch(`${process.env.REACT_APP_URL}/opinions`, {
     method: "POST",
     body: JSON.stringify(body),
     headers: {

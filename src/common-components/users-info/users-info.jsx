@@ -32,7 +32,7 @@ function UsersInfo() {
               variant="top"
               src={
                 userData?.file
-                  ? `http://localhost:4000/${userData.file}`
+                  ? `${process.env.REACT_APP_URL}/${userData.file}`
                   : blankUser
               }
             />

@@ -104,7 +104,7 @@ function BodyEventsDetails() {
                 }}
                 src={
                   eventDetails?.file
-                    ? `http://localhost:4000/${eventDetails.file}`
+                    ? `${process.env.REACT_APP_URL}/${eventDetails.file}`
                     : blank
                 }
                 alt=""

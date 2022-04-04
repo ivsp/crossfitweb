@@ -81,7 +81,9 @@ function BodyEvents() {
                 >
                   <Card.Img
                     className="mt-xl-3 "
-                    src={e.file ? `http://localhost:4000/${e.file}` : blank}
+                    src={
+                      e.file ? `${process.env.REACT_APP_URL}/${e.file}` : blank
+                    }
                   />
                 </Col>
                 <Col

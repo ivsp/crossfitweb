@@ -14,11 +14,8 @@ function BoxesCards({ box, image }) {
         src={image}
       />
       <Card.Body className="card-body__container">
-        <Card.Title className="card-body_tittle">{box}</Card.Title>
-        <Card.Text className="card-body_parr">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
+        <Card.Title className="card-body_tittle">{box.name}</Card.Title>
+        <Card.Text className="card-body_parr">{box.description}</Card.Text>
       </Card.Body>
     </Card>
   );

@@ -20,11 +20,8 @@ function CitiesCards({ city, image }) {
         src={image}
       />
       <Card.Body className="card-body__container">
-        <Card.Title className="card-body_tittle">{city}</Card.Title>
-        <Card.Text className="card-body_parr">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
+        <Card.Title className="card-body_tittle">{city.name}</Card.Title>
+        <Card.Text className="card-body_parr">{city.description}</Card.Text>
         <Button className="event_button" variant={theming.soft_details.color}>
           {t("events_area.popular_events_button")}
         </Button>
