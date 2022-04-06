@@ -1,5 +1,5 @@
 # WOD TARGET
-![](https://raw.githubusercontent.com/usuario/crossfitweb/main/src/assets/images/wodtarget.jpg)
+![](https://raw.githubusercontent.com/ivsp/crossfitweb/main/src/assets/images/wodtarget.JPG)
 
 ## Description
 Website to create and join crossfit events. This website has two different users. The first one, the sports centres, who create the events. The second, the athletes who sign up for these events.
